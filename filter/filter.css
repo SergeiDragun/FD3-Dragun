@@ -1,0 +1,11 @@
+.stringsBlock {
+    border: 2px solid black;
+    width: 300px;
+    height: 100px;
+    padding: 0 5px;
+    overflow: auto;
+}
+
+.stringsBlock > span {
+    display: block;
+}
