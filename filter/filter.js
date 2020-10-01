@@ -14,7 +14,7 @@ let Filter = React.createClass({
                 React.DOM.input( {type: "text"} ),
                 React.DOM.input( {type: "button", value: "Сброс"} ),
             ),
-            React.DOM.div( {className: "stringsBlock"}, strings)
-        )
+            React.DOM.div( {className: "stringsBlock"}, strings),
+        );
     },
-})
+});
