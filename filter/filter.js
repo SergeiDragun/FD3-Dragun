@@ -8,6 +8,13 @@ let Filter = React.createClass({
             return React.DOM.span({key: item.code}, item.name)
         });
         
-        return React.DOM.div( {className: "stringsBlock"}, strings)
+        return React.DOM.div( {className: "wrapper"},
+            React.DOM.div( {className: "inputsBlock"},
+                React.DOM.input( {type: "checkBox"} ),
+                React.DOM.input( {type: "text"} ),
+                React.DOM.input( {type: "button", value: "Сброс"} ),
+            ),
+            React.DOM.div( {className: "stringsBlock"}, strings)
+        )
     },
 })
