@@ -4,9 +4,9 @@ let Filter = React.createClass({
 
     render: function() {
 
-        let strings = this.props.strings.map(item => {
-            return React.DOM.span({key: item.code}, item.name)
-        });
+        let strings = this.props.strings.map(item => 
+            ( React.DOM.span({key: item.code}, item.name) )
+        );
         
         return React.DOM.div( {className: "wrapper"},
             React.DOM.div( {className: "inputsBlock"},
