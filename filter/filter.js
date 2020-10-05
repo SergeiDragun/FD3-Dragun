@@ -14,65 +14,63 @@ let Filter = React.createClass({
 
     getInitialState: function() {
         return {
-            inputText: this.props.defInputText,
-            sortCheckBox: false,
-            filteredArr: this.props.strings
+            filterArr: this.props.defInputText,
+            sortArr: false,
+            currentArr: this.props.strings
         }
     },
 
-    filterStrings: function() {
-        let newFilteredArr = this.props.strings.filter(item => item.name.includes(this.state.inputText));
+    transformArray: function() {
+        let transformedArr = this.props.strings;
+        if (this.state.filterArr) {
+            transformedArr = transformedArr.filter(item => item.name.includes(this.state.filterArr));
+        };
+        if (this.state.sortArr) {
+            transformedArr = transformedArr.sort((a, b) => {
+                if (a.name > b.name) {
+                  return 1;
+                }
+                if (a.name < b.name) {
+                  return -1;
+                }
+                return 0;
+            })
+        };
         this.setState({
-            filteredArr: newFilteredArr
-        })
-        console.log(this.state.filteredArr)
-    },
-
-    sortStrings: function() {
-        let newSortedArr = this.state.filteredArr.sort((a, b) => {
-            if (a.name > b.name) {
-              return 1;
-            }
-            if (a.name < b.name) {
-              return -1;
-            }
-            return 0;
+            currentArr: transformedArr
         });
-        this.setState({
-            filteredArr: newSortedArr
-        })
     },
 
-    filterArr: function(EO) {
+    filterArray: function(EO) {
         this.setState({
-            inputText: EO.target.value,
-        }, this.filterStrings);
+            filterArr: EO.target.value,
+        }, this.transformArray);
     },
 
-    sortArr: function(EO) {
+    sortArray: function(EO) {
         this.setState({
-            sortCheckBox: EO.target.checked,
-        }, this.sortStrings);
+            sortArr: EO.target.checked,
+        }, this.transformArray);
     },
 
     reset: function() {
         this.setState({
-            inputText: this.props.defInputText,
-            sortCheckBox: false,
-            filteredArr: this.props.strings
+            filterArr: this.props.defInputText,
+            sortArr: false,
+            currentArr: this.props.strings
         })
     },
 
     render: function() {
 
-        let strings = this.state.filteredArr.map(item => 
+        let strings = this.state.currentArr.map(item => 
             ( React.DOM.span({key: item.code}, item.name) )
         );
         
             return React.DOM.div( {className: "wrapper"},
             React.DOM.div( {className: "inputsBlock"},
-                React.DOM.input( {type: "checkBox", onChange: this.sortArr, checked: this.state.sortCheckBox} ),
-                React.DOM.input( {type: "text", onChange: this.filterArr, value: this.state.inputText} ),
+                React.DOM.input( {type: "checkBox", onChange: this.sortArray, checked: this.state.sortArr} ),
+                React.DOM.input( {type: "text", onChange: this.filterArray, value: this.state.filterArr} ),
                 React.DOM.input( {type: "button", value: "Сброс", onClick: this.reset} ),
             ),
             React.DOM.div( {className: "stringsBlock"}, strings),
