@@ -17,19 +17,26 @@
     <script>
 
         let stringsArr = [
-            {name: "авыаывпщеоивлиь", code: 1},
-            {name: "пкеипитпткткетт", code: 2},
-            {name: "гортчсмкукукуиф", code: 3},
-            {name: "йызхвдзмьмалмьм", code: 4},
-            {name: "ииаавккфппкйщшп", code: 5},
-            {name: "фывакпкиииитивл", code: 6},
-            {name: "пуеиедьдмьмдузк", code: 7},
-            {name: "пкуптдлжжыоиитк", code: 8},
-            {name: "пкщйщйукьптиоту", code: 9},
+            {name: "дщмздььсущуыдьа", code: 1},
+            {name: "гбвгдеёжзийклмн", code: 2},
+            {name: "еортчсмкукукуиф", code: 3},
+            {name: "зызхвдзмьмалмьм", code: 4},
+            {name: "жиаавккфппкйщшп", code: 5},
+            {name: "бвгдеёиклмстухч", code: 6},
+            {name: "вуеиедьдмьмдузк", code: 7},
+            {name: "акуптдлжжыоиитк", code: 8},
+            {name: "икщйщйукьптиоту", code: 9},
+            {name: "ёкщйщйукьптиоту", code: 10},
+            {name: "ккщйщйукьптиоту", code: 11},
+            {name: "мкщйщйукьптиоту", code: 12},
+            {name: "йкщйщйукьптиоту", code: 13},
+            {name: "лкщйщйукьптиоту", code: 14},
         ];
 
+        let defaultInputText = "";
+
         ReactDOM.render(
-            React.createElement(Filter, {strings: stringsArr}),
+            React.createElement(Filter, {strings: stringsArr, defInputText: defaultInputText}),
             document.getElementById("container")
         );
     </script>
