@@ -21,7 +21,7 @@ let Filter = React.createClass({
     },
 
     transformArray: function() {
-        let transformedArr = this.props.strings;
+        let transformedArr = this.props.strings.slice();
         if (this.state.filterArr) {
             transformedArr = transformedArr.filter(item => item.name.includes(this.state.filterArr));
         };
