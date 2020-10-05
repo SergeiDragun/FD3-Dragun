@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>isShop</title>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="isShop2.js"></script>
+    <link rel="stylesheet" href="isShop2.css">
+
+    <script>
+
+        let shopName = "Продуктовый магазин";
+        let productListArr = [
+            { name:"Молоко", code:1, price:10, url:"https://cutt.ly/Sf9fhLB", balance:8 },
+            { name:"Кефир", code:2, price:11, url:"https://cutt.ly/pf9fnR6", balance:9 },
+            { name:"Сметана", code:3, price:7, url:"https://cutt.ly/6f9fttl", balance:2 },
+            { name:"Колбаса", code:4, price:24, url:"https://cutt.ly/nf9fDpm", balance:15 },
+            { name:"Мясо", code:5, price:35, url:"https://cutt.ly/of9fLJQ", balance:6 },
+            { name:"Сосиски", code:6, price:15, url:"https://cutt.ly/Vf9fNG9", balance:28 },
+            { name:"Конфеты", code:7, price:6, url:"https://cutt.ly/Xf9gqVU", balance:14 },
+            { name:"Печенье", code:8, price:4, url:"https://cutt.ly/Pf9gp5A", balance:53 },
+            { name:"Вафли", code:9, price:5, url:"https://cutt.ly/Kf9ggub", balance:7 },
+            { name:"Огурцы", code:10, price:2, url:"https://cutt.ly/Mf9gjAu", balance:75 },
+            { name:"Помидоры", code:11, price:3, url:"https://cutt.ly/jf9gzFe", balance:57 },
+            { name:"Капуста", code:12, price:6, url:"https://cutt.ly/af9gmXB", balance:1 }
+        ];
+
+        ReactDOM.render(
+            React.createElement(IsShop2, {shop:shopName, productList:productListArr}),
+            document.getElementById("container")
+        );
+    </script>
+</body>
+</html>

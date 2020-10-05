@@ -1,0 +1,55 @@
+#container {
+    width: 100%;
+}
+
+.IsShop {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    border: 3px solid grey;
+}
+
+.ShopName {
+    padding: 20px;
+    font-style: italic;
+    font-size: 2em;
+    color: #666;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.Options {
+    background-color: lightgray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Options > tr th {
+    padding: 20px;
+    border: 3px solid grey;
+    font-size: 1.5em;
+}
+
+.Products > tr td {
+    padding: 5px;
+    font-size: 1.5em;
+    border: 3px solid grey;
+    text-align: center;
+}
+
+.Products > tr td:nth-child(1) {
+    background-color: rgb(245, 245, 235);
+}
+
+.Products > tr td:nth-child(2) {
+    background-color: rgb(255, 255, 255);
+}
+
+.Products > tr td:nth-child(3) {
+    background-color: rgb(235, 255, 235);
+}
+
+.Products > tr td:nth-child(4) {
+    background-color: rgb(255, 235, 235);
+}
