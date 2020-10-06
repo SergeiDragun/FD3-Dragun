@@ -23,7 +23,7 @@ let Product = React.createClass({
     },
 
     render: function() {
-        return React.DOM.tr( {onClick: this.changeColor, className: this.props.selected?this.props.selected:null},
+        return React.DOM.tr( {onClick: this.changeColor, className: this.props.selected},
             React.DOM.td( null, this.props.name ),
             React.DOM.td( null, React.DOM.img({src: this.props.url}) ),
             React.DOM.td( null, this.props.price ),
