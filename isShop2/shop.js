@@ -31,9 +31,13 @@ let IsShop2 = React.createClass({
     },
 
     deleteProduct: function(code) {
-        let delProduct = this.state.productList.slice();
-        delProduct = delProduct.filter(item => item.code!=code);
-        this.setState({productList: delProduct})
+        let consent = confirm("Вы хотите удалить товар?");
+        if (consent) {
+            let delProduct = this.state.productList.slice();
+            delProduct = delProduct.filter(item => item.code!=code);
+            this.setState({productList: delProduct});
+        }
+        
     },
 
     render: function() {
