@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.IsShop {
+.IsShop2 {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
@@ -29,6 +29,7 @@
     padding: 20px;
     border: 3px solid grey;
     font-size: 1.5em;
+    text-align: center;
 }
 
 .Products > tr td {
@@ -36,20 +37,16 @@
     font-size: 1.5em;
     border: 3px solid grey;
     text-align: center;
+    box-sizing: border-box;
+    height: 150px;
 }
 
-.Products > tr td:nth-child(1) {
-    background-color: rgb(245, 245, 235);
+.Products > tr > td > input {
+    width: 100%;
+    height: inherit;
+    cursor: pointer;
 }
 
-.Products > tr td:nth-child(2) {
-    background-color: rgb(255, 255, 255);
-}
-
-.Products > tr td:nth-child(3) {
-    background-color: rgb(235, 255, 235);
-}
-
-.Products > tr td:nth-child(4) {
-    background-color: rgb(255, 235, 235);
+.selected {
+    background-color: red
 }
