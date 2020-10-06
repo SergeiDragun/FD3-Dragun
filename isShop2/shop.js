@@ -51,7 +51,7 @@ let IsShop2 = React.createClass({
                 balance: item.balance,
                 cbSelectedLine: this.selectedLine,
                 cbDeleteProduct: this.deleteProduct,
-                selected: (this.state.highlitedLine == item.code)?"selected":null,
+                selected: (this.state.highlitedLine == item.code)?true:false,
             })
         });
 

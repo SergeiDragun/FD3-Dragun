@@ -10,11 +10,12 @@ let Product = React.createClass({
         balance: React.PropTypes.number.isRequired,
         cbSelectedLine: React.PropTypes.func.isRequired,
         cbDeleteProduct: React.PropTypes.func.isRequired,
-        selected: React.PropTypes.string,
+        selected: React.PropTypes.bool.isRequired,
     },
 
     
     changeColor: function(EO) {
+        EO.stopPropagation();
         this.props.cbSelectedLine(this.props.code);
     },
 
@@ -24,7 +25,7 @@ let Product = React.createClass({
     },
 
     render: function() {
-        return React.DOM.tr( {onClick: this.changeColor, className: this.props.selected},
+        return React.DOM.tr( {onClick: this.changeColor, className: this.props.selected?"selected":null},
             React.DOM.td( null, this.props.name ),
             React.DOM.td( null, React.DOM.img({src: this.props.url}) ),
             React.DOM.td( null, this.props.price ),
