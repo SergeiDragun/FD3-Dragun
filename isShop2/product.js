@@ -19,6 +19,7 @@ let Product = React.createClass({
     },
 
     deleteProduct: function(EO) {
+        EO.stopPropagation();
         this.props.cbDeleteProduct(this.props.code);
     },
 
