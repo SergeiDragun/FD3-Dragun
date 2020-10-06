@@ -22,6 +22,7 @@ let IsShop2 = React.createClass({
     getInitialState: function() {
         return { 
             highlitedLine: 0,
+            productList: this.props.productList,
         };
     },
 
@@ -29,9 +30,14 @@ let IsShop2 = React.createClass({
         this.setState( {highlitedLine: code} );
     },
 
-    render: function() {
+    deleteProduct: function(code) {
+        let delProduct = this.state.productList.slice();
+        delProduct = delProduct.filter(item => item.code!=code);
+        this.setState({productList: delProduct})
+    },
 
-        let products = this.props.productList.map(item => {
+    render: function() {
+        let products = this.state.productList.map(item => {
             return React.createElement(Product, {
                 key: item.code,
                 code: item.code,
@@ -40,6 +46,7 @@ let IsShop2 = React.createClass({
                 url: item.url,
                 balance: item.balance,
                 cbSelectedLine: this.selectedLine,
+                cbDeleteProduct: this.deleteProduct,
                 selected: (this.state.highlitedLine == item.code)?"selected":null,
             })
         });
