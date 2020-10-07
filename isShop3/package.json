@@ -4,7 +4,8 @@
   "description": "home_task_№4",
   "main": "shop.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
   },
   "repository": {
     "type": "git",
