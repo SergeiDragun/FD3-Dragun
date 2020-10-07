@@ -1,0 +1,19 @@
+{
+  "name": "isshop3",
+  "version": "1.0.0",
+  "description": "home_task_№4",
+  "main": "shop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeiDragun/FD3-Dragun.git"
+  },
+  "author": "Dragun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeiDragun/FD3-Dragun/issues"
+  },
+  "homepage": "https://github.com/SergeiDragun/FD3-Dragun#readme"
+}
