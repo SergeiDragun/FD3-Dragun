@@ -1,0 +1,26 @@
+.IsShop2 {
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.ShopName {
+    padding: 10px;
+    font-style: italic;
+    font-size: 1em;
+    color: #666;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.Options {
+    background-color: lightgray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Options > tr > th {
+    padding: 5px;
+    border: 2px solid grey;
+    font-size: 1em;
+    text-align: center;
+}
