@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/SergeiDragun/FD3-Dragun/issues"
   },
-  "homepage": "https://github.com/SergeiDragun/FD3-Dragun#readme"
+  "homepage": "https://github.com/SergeiDragun/FD3-Dragun#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4",
+    "webpack": "^4.44.2"
+  }
 }
