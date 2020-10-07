@@ -1,3 +1,7 @@
+import React from 'react';
+
+import './product.css';
+
 let Product = React.createClass({
 
     displayName: "Product",
@@ -35,3 +39,5 @@ let Product = React.createClass({
     }
 
 })
+
+export default Product;

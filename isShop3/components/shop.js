@@ -1,6 +1,12 @@
+import React from 'react';
+
+import './shop.css';
+
+import Product from './Product';
+
 let IsShop3 = React.createClass({
 
-    displayName: "IsShop",
+    displayName: "IsShop3",
 
     getDefaultProps: function() {
        return { shop: "Какой-то магазин" }
@@ -70,3 +76,5 @@ let IsShop3 = React.createClass({
         );
     },
 })
+
+export default IsShop3;

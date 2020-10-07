@@ -1,39 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>isShop</title>
-</head>
-<body>
-    <div id="container"></div>
-
-    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
-    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
-
-    <script src="components/shop.js"></script>
-    <script src="components/product.js"></script>
-    <link rel="stylesheet" href="components/shop.css">
-    <link rel="stylesheet" href="components/product.css">
-
-    <script>
-
-        let shopName = "Продуктовый магазин";
-        let productListArr = [
-            { name:"Молоко", code:1, price:10, url:"https://cutt.ly/Sf9fhLB", balance:8 },
-            { name:"Кефир", code:2, price:11, url:"https://cutt.ly/pf9fnR6", balance:9 },
-            { name:"Колбаса", code:4, price:24, url:"https://cutt.ly/nf9fDpm", balance:15 },
-            { name:"Мясо", code:5, price:35, url:"https://cutt.ly/of9fLJQ", balance:6 },
-            { name:"Конфеты", code:7, price:6, url:"https://cutt.ly/Xf9gqVU", balance:14 },
-            { name:"Печенье", code:8, price:4, url:"https://cutt.ly/Pf9gp5A", balance:53 },
-            { name:"Огурцы", code:10, price:2, url:"https://cutt.ly/Mf9gjAu", balance:75 },
-            { name:"Помидоры", code:11, price:3, url:"https://cutt.ly/jf9gzFe", balance:57 },
-        ];
-
-        ReactDOM.render(
-            React.createElement(IsShop3, {shop:shopName, productList:productListArr}),
-            document.getElementById("container")
-        );
-    </script>
-</body>
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>isShop3</title>
+  <link rel="stylesheet" type="text/css" href="bundle.css">
+</head> 
+<body> 
+  <div id="container"></div> 
+  <script src="bundle.js"></script>
+</body> 
 </html>
