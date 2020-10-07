@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/SergeiDragun/FD3-Dragun#readme",
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
     "lite-server": "^2.5.4",

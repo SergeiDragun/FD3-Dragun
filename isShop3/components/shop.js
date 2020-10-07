@@ -1,4 +1,4 @@
-let IsShop2 = React.createClass({
+let IsShop3 = React.createClass({
 
     displayName: "IsShop",
 

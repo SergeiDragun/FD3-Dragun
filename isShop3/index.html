@@ -11,10 +11,10 @@
     <script src="https://unpkg.com/react@15/dist/react.js"></script> 
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 
-    <script src="shop.js"></script>
-    <script src="product.js"></script>
-    <link rel="stylesheet" href="shop.css">
-    <link rel="stylesheet" href="product.css">
+    <script src="components/shop.js"></script>
+    <script src="components/product.js"></script>
+    <link rel="stylesheet" href="components/shop.css">
+    <link rel="stylesheet" href="components/product.css">
 
     <script>
 
@@ -31,7 +31,7 @@
         ];
 
         ReactDOM.render(
-            React.createElement(IsShop2, {shop:shopName, productList:productListArr}),
+            React.createElement(IsShop3, {shop:shopName, productList:productListArr}),
             document.getElementById("container")
         );
     </script>
