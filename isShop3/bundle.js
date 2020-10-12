@@ -29466,22 +29466,9 @@ var IsShop3 = function (_React$Component) {
                     balance: item.balance,
                     cbSelectedLine: _this2.selectedLine,
                     cbDeleteProduct: _this2.deleteProduct,
-                    selected: _this2.state.highlitedLine == item.code ? true : false
+                    selected: _this2.state.highlitedLine == item.code && true
                 });
-            }
-            /* {
-            return React.createElement(Product, {
-                key: item.code,
-                code: item.code,
-                name: item.name,
-                price: item.price,
-                url: item.url,
-                balance: item.balance,
-                cbSelectedLine: this.selectedLine,
-                cbDeleteProduct: this.deleteProduct,
-                selected: (this.state.highlitedLine == item.code)?true:false,
-            })
-            } */);
+            });
             return _react2.default.createElement(
                 'table',
                 { className: 'IsShop3' },
@@ -29529,19 +29516,6 @@ var IsShop3 = function (_React$Component) {
                     products
                 )
             );
-            /* return DOM.table( {className:'IsShop3'}, 
-                DOM.caption( {className:'ShopName'}, this.props.shop ),
-                DOM.thead( {className: "Options"},
-                    DOM.tr( null, 
-                        DOM.th( null, "Подукт"),
-                        DOM.th( null, "Изображение"),
-                        DOM.th( null, "Цена"),
-                        DOM.th( null, "Отаток"),
-                        DOM.th( null, "Control"),
-                    ) 
-                ),
-                DOM.tbody( {className:'Products'}, products),
-            ); */
         }
     }]);
 
@@ -30543,13 +30517,6 @@ var Product = function (_React$Component) {
                     _react2.default.createElement('input', { type: 'button', value: '\u0423\u0434\u0430\u043B\u0438\u0442\u044C', onClick: this.deleteProduct })
                 )
             );
-            /* DOM.tr( {onClick: this.changeColor, className: this.props.selected?"selected":null},
-                DOM.td( null, this.props.name ),
-                DOM.td( null, DOM.img({src: this.props.url}) ),
-                DOM.td( null, this.props.price ),
-                DOM.td( null, this.props.balance), 
-                DOM.td( null, DOM.input({type: "button", value: "Удалить", onClick: this.deleteProduct}))
-            ) */
         }
     }]);
 

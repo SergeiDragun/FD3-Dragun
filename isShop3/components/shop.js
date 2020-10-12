@@ -51,7 +51,7 @@ class IsShop3 extends React.Component {
                 balance={item.balance}
                 cbSelectedLine={this.selectedLine}
                 cbDeleteProduct={this.deleteProduct}
-                selected={(this.state.highlitedLine == item.code)?true:false}
+                selected={(this.state.highlitedLine == item.code)&&true}
             />
         );
         return (
