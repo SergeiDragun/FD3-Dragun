@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import DOM from 'react-dom-factories';
 
 import './shop.css';
 
@@ -7,14 +9,14 @@ import Product from './Product';
 class IsShop3 extends React.Component {
 
     static propTypes = {
-        shop: React.PropTypes.string.isRequired,
-        productList: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                name: React.PropTypes.string.isRequired,
-                code: React.PropTypes.number.isRequired,
-                price: React.PropTypes.number.isRequired,
-                url: React.PropTypes.string.isRequired,
-                balance: React.PropTypes.number.isRequired
+        shop: PropTypes.string.isRequired,
+        productList: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                code: PropTypes.number.isRequired,
+                price: PropTypes.number.isRequired,
+                url: PropTypes.string.isRequired,
+                balance: PropTypes.number.isRequired
             })
         ),
     };
@@ -53,18 +55,18 @@ class IsShop3 extends React.Component {
             })
         });
 
-        return React.DOM.table( {className:'IsShop3'}, 
-            React.DOM.caption( {className:'ShopName'}, this.props.shop ),
-            React.DOM.thead( {className: "Options"},
-                React.DOM.tr( null, 
-                    React.DOM.th( null, "Подукт"),
-                    React.DOM.th( null, "Изображение"),
-                    React.DOM.th( null, "Цена"),
-                    React.DOM.th( null, "Отаток"),
-                    React.DOM.th( null, "Control"),
+        return DOM.table( {className:'IsShop3'}, 
+            DOM.caption( {className:'ShopName'}, this.props.shop ),
+            DOM.thead( {className: "Options"},
+                DOM.tr( null, 
+                    DOM.th( null, "Подукт"),
+                    DOM.th( null, "Изображение"),
+                    DOM.th( null, "Цена"),
+                    DOM.th( null, "Отаток"),
+                    DOM.th( null, "Control"),
                 ) 
             ),
-            React.DOM.tbody( {className:'Products'}, products),
+            DOM.tbody( {className:'Products'}, products),
         );
     };
 };
