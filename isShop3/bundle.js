@@ -22756,6 +22756,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
@@ -22768,67 +22770,84 @@ var _Product2 = _interopRequireDefault(_Product);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var IsShop3 = _react2.default.createClass({
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    displayName: "IsShop3",
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    getDefaultProps: function getDefaultProps() {
-        return { shop: "Какой-то магазин" };
-    },
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    propTypes: {
-        shop: _react2.default.PropTypes.string.isRequired,
-        productList: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-            name: _react2.default.PropTypes.string.isRequired,
-            code: _react2.default.PropTypes.number.isRequired,
-            price: _react2.default.PropTypes.number.isRequired,
-            url: _react2.default.PropTypes.string.isRequired,
-            balance: _react2.default.PropTypes.number.isRequired
-        }))
-    },
+var IsShop3 = function (_React$Component) {
+    _inherits(IsShop3, _React$Component);
 
-    getInitialState: function getInitialState() {
-        return {
-            highlitedLine: 0,
-            productList: this.props.productList
-        };
-    },
+    function IsShop3() {
+        var _ref;
 
-    selectedLine: function selectedLine(code) {
-        this.setState({ highlitedLine: code });
-    },
+        var _temp, _this, _ret;
 
-    deleteProduct: function deleteProduct(code) {
-        var consent = confirm("Вы хотите удалить товар?");
-        if (consent) {
-            var delProduct = this.state.productList.slice();
-            delProduct = delProduct.filter(function (item) {
-                return item.code != code;
-            });
-            this.setState({ productList: delProduct });
+        _classCallCheck(this, IsShop3);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
         }
-    },
 
-    render: function render() {
-        var _this = this;
-
-        var products = this.state.productList.map(function (item) {
-            return _react2.default.createElement(_Product2.default, {
-                key: item.code,
-                code: item.code,
-                name: item.name,
-                price: item.price,
-                url: item.url,
-                balance: item.balance,
-                cbSelectedLine: _this.selectedLine,
-                cbDeleteProduct: _this.deleteProduct,
-                selected: _this.state.highlitedLine == item.code ? true : false
-            });
-        });
-
-        return _react2.default.DOM.table({ className: 'IsShop2' }, _react2.default.DOM.caption({ className: 'ShopName' }, this.props.shop), _react2.default.DOM.thead({ className: "Options" }, _react2.default.DOM.tr(null, _react2.default.DOM.th(null, "Подукт"), _react2.default.DOM.th(null, "Изображение"), _react2.default.DOM.th(null, "Цена"), _react2.default.DOM.th(null, "Отаток"), _react2.default.DOM.th(null, "Control"))), _react2.default.DOM.tbody({ className: 'Products' }, products));
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = IsShop3.__proto__ || Object.getPrototypeOf(IsShop3)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            highlitedLine: 0,
+            productList: _this.props.productList
+        }, _this.selectedLine = function (code) {
+            _this.setState({ highlitedLine: code });
+        }, _this.deleteProduct = function (code) {
+            var consent = confirm("Вы хотите удалить товар?");
+            if (consent) {
+                var delProduct = _this.state.productList.slice();
+                delProduct = delProduct.filter(function (item) {
+                    return item.code != code;
+                });
+                _this.setState({ productList: delProduct });
+            }
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
-});
+
+    _createClass(IsShop3, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var products = this.state.productList.map(function (item) {
+                return _react2.default.createElement(_Product2.default, {
+                    key: item.code,
+                    code: item.code,
+                    name: item.name,
+                    price: item.price,
+                    url: item.url,
+                    balance: item.balance,
+                    cbSelectedLine: _this2.selectedLine,
+                    cbDeleteProduct: _this2.deleteProduct,
+                    selected: _this2.state.highlitedLine == item.code ? true : false
+                });
+            });
+
+            return _react2.default.DOM.table({ className: 'IsShop3' }, _react2.default.DOM.caption({ className: 'ShopName' }, this.props.shop), _react2.default.DOM.thead({ className: "Options" }, _react2.default.DOM.tr(null, _react2.default.DOM.th(null, "Подукт"), _react2.default.DOM.th(null, "Изображение"), _react2.default.DOM.th(null, "Цена"), _react2.default.DOM.th(null, "Отаток"), _react2.default.DOM.th(null, "Control"))), _react2.default.DOM.tbody({ className: 'Products' }, products));
+        }
+    }]);
+
+    return IsShop3;
+}(_react2.default.Component);
+
+IsShop3.propTypes = {
+    shop: _react2.default.PropTypes.string.isRequired,
+    productList: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+        name: _react2.default.PropTypes.string.isRequired,
+        code: _react2.default.PropTypes.number.isRequired,
+        price: _react2.default.PropTypes.number.isRequired,
+        url: _react2.default.PropTypes.string.isRequired,
+        balance: _react2.default.PropTypes.number.isRequired
+    }))
+};
+;
+
+IsShop3.defaultProps = {
+    shop: "Какой-то магазин"
+};
 
 exports.default = IsShop3;
 
@@ -22849,6 +22868,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
@@ -22857,36 +22878,56 @@ __webpack_require__(190);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Product = _react2.default.createClass({
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    displayName: "Product",
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    propTypes: {
-        name: _react2.default.PropTypes.string.isRequired,
-        code: _react2.default.PropTypes.number.isRequired,
-        price: _react2.default.PropTypes.number.isRequired,
-        url: _react2.default.PropTypes.string.isRequired,
-        balance: _react2.default.PropTypes.number.isRequired,
-        cbSelectedLine: _react2.default.PropTypes.func.isRequired,
-        cbDeleteProduct: _react2.default.PropTypes.func.isRequired,
-        selected: _react2.default.PropTypes.bool.isRequired
-    },
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    changeColor: function changeColor(EO) {
-        EO.stopPropagation();
-        this.props.cbSelectedLine(this.props.code);
-    },
+var Product = function (_React$Component) {
+    _inherits(Product, _React$Component);
 
-    deleteProduct: function deleteProduct(EO) {
-        EO.stopPropagation();
-        this.props.cbDeleteProduct(this.props.code);
-    },
+    function Product() {
+        var _ref;
 
-    render: function render() {
-        return _react2.default.DOM.tr({ onClick: this.changeColor, className: this.props.selected ? "selected" : null }, _react2.default.DOM.td(null, this.props.name), _react2.default.DOM.td(null, _react2.default.DOM.img({ src: this.props.url })), _react2.default.DOM.td(null, this.props.price), _react2.default.DOM.td(null, this.props.balance), _react2.default.DOM.td(null, _react2.default.DOM.input({ type: "button", value: "Удалить", onClick: this.deleteProduct })));
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, Product);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Product.__proto__ || Object.getPrototypeOf(Product)).call.apply(_ref, [this].concat(args))), _this), _this.changeColor = function (EO) {
+            EO.stopPropagation();
+            _this.props.cbSelectedLine(_this.props.code);
+        }, _this.deleteProduct = function (EO) {
+            EO.stopPropagation();
+            _this.props.cbDeleteProduct(_this.props.code);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-});
+    _createClass(Product, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.DOM.tr({ onClick: this.changeColor, className: this.props.selected ? "selected" : null }, _react2.default.DOM.td(null, this.props.name), _react2.default.DOM.td(null, _react2.default.DOM.img({ src: this.props.url })), _react2.default.DOM.td(null, this.props.price), _react2.default.DOM.td(null, this.props.balance), _react2.default.DOM.td(null, _react2.default.DOM.input({ type: "button", value: "Удалить", onClick: this.deleteProduct })));
+        }
+    }]);
+
+    return Product;
+}(_react2.default.Component);
+
+Product.propTypes = {
+    name: _react2.default.PropTypes.string.isRequired,
+    code: _react2.default.PropTypes.number.isRequired,
+    price: _react2.default.PropTypes.number.isRequired,
+    url: _react2.default.PropTypes.string.isRequired,
+    balance: _react2.default.PropTypes.number.isRequired,
+    cbSelectedLine: _react2.default.PropTypes.func.isRequired,
+    cbDeleteProduct: _react2.default.PropTypes.func.isRequired,
+    selected: _react2.default.PropTypes.bool.isRequired
+};
+;
 
 exports.default = Product;
 

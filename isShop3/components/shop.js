@@ -4,15 +4,9 @@ import './shop.css';
 
 import Product from './Product';
 
-let IsShop3 = React.createClass({
+class IsShop3 extends React.Component {
 
-    displayName: "IsShop3",
-
-    getDefaultProps: function() {
-       return { shop: "Какой-то магазин" }
-    },
-
-    propTypes: {
+    static propTypes = {
         shop: React.PropTypes.string.isRequired,
         productList: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -23,20 +17,18 @@ let IsShop3 = React.createClass({
                 balance: React.PropTypes.number.isRequired
             })
         ),
-    },
+    };
 
-    getInitialState: function() {
-        return { 
-            highlitedLine: 0,
-            productList: this.props.productList,
-        };
-    },
+    state = {
+        highlitedLine: 0,
+        productList: this.props.productList,
+    };
 
-    selectedLine: function(code) {
+    selectedLine = (code) => {
         this.setState( {highlitedLine: code} );
-    },
+    };
 
-    deleteProduct: function(code) {
+    deleteProduct = (code) => {
         let consent = confirm("Вы хотите удалить товар?");
         if (consent) {
             let delProduct = this.state.productList.slice();
@@ -44,9 +36,9 @@ let IsShop3 = React.createClass({
             this.setState({productList: delProduct});
         }
         
-    },
+    };
 
-    render: function() {
+    render() {
         let products = this.state.productList.map(item => {
             return React.createElement(Product, {
                 key: item.code,
@@ -61,7 +53,7 @@ let IsShop3 = React.createClass({
             })
         });
 
-        return React.DOM.table( {className:'IsShop2'}, 
+        return React.DOM.table( {className:'IsShop3'}, 
             React.DOM.caption( {className:'ShopName'}, this.props.shop ),
             React.DOM.thead( {className: "Options"},
                 React.DOM.tr( null, 
@@ -74,7 +66,11 @@ let IsShop3 = React.createClass({
             ),
             React.DOM.tbody( {className:'Products'}, products),
         );
-    },
-})
+    };
+};
+
+IsShop3.defaultProps = {
+    shop: "Какой-то магазин",
+};
 
 export default IsShop3;
