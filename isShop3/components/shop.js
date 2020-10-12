@@ -41,32 +41,33 @@ class IsShop3 extends React.Component {
     };
 
     render() {
-        let products = this.state.productList.map(item => {
-            return React.createElement(Product, {
-                key: item.code,
-                code: item.code,
-                name: item.name,
-                price: item.price,
-                url: item.url,
-                balance: item.balance,
-                cbSelectedLine: this.selectedLine,
-                cbDeleteProduct: this.deleteProduct,
-                selected: (this.state.highlitedLine == item.code)?true:false,
-            })
-        });
-
-        return DOM.table( {className:'IsShop3'}, 
-            DOM.caption( {className:'ShopName'}, this.props.shop ),
-            DOM.thead( {className: "Options"},
-                DOM.tr( null, 
-                    DOM.th( null, "Подукт"),
-                    DOM.th( null, "Изображение"),
-                    DOM.th( null, "Цена"),
-                    DOM.th( null, "Отаток"),
-                    DOM.th( null, "Control"),
-                ) 
-            ),
-            DOM.tbody( {className:'Products'}, products),
+        let products = this.state.productList.map(item =>
+            <Product
+                key={item.code}
+                code={item.code}
+                name={item.name}
+                price={item.price}
+                url={item.url}
+                balance={item.balance}
+                cbSelectedLine={this.selectedLine}
+                cbDeleteProduct={this.deleteProduct}
+                selected={(this.state.highlitedLine == item.code)?true:false}
+            />
+        );
+        return (
+            <table className="IsShop3">
+                <caption className="ShopName">{this.props.shop}</caption>
+                <thead className="Options">
+                    <tr>
+                        <th>"Продукт"</th>
+                        <th>"Изображение"</th>
+                        <th>"Цена"</th>
+                        <th>"Остаток"</th>
+                        <th>"Control"</th>
+                    </tr>
+                </thead>
+                <tbody className="Products">{products}</tbody>
+            </table>
         );
     };
 };

@@ -9,6 +9,9 @@ let shopName = "Продуктовый магазин";
 let productListArr = require('./products.json');
 
 ReactDOM.render(
-    React.createElement(IsShop3, {shop:shopName, productList:productListArr}),
-    document.getElementById("container")
+    <IsShop3
+        shop={shopName}
+        productList={productListArr}
+    />
+    , document.getElementById("container")
 );

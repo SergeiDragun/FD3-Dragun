@@ -776,7 +776,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var shopName = "Продуктовый магазин";
 var productListArr = __webpack_require__(28);
 
-_reactDom2.default.render(_react2.default.createElement(_Shop2.default, { shop: shopName, productList: productListArr }), document.getElementById("container"));
+_reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
+    shop: shopName,
+    productList: productListArr
+}), document.getElementById("container"));
 
 /***/ }),
 /* 10 */
@@ -29465,9 +29468,80 @@ var IsShop3 = function (_React$Component) {
                     cbDeleteProduct: _this2.deleteProduct,
                     selected: _this2.state.highlitedLine == item.code ? true : false
                 });
-            });
-
-            return _reactDomFactories2.default.table({ className: 'IsShop3' }, _reactDomFactories2.default.caption({ className: 'ShopName' }, this.props.shop), _reactDomFactories2.default.thead({ className: "Options" }, _reactDomFactories2.default.tr(null, _reactDomFactories2.default.th(null, "Подукт"), _reactDomFactories2.default.th(null, "Изображение"), _reactDomFactories2.default.th(null, "Цена"), _reactDomFactories2.default.th(null, "Отаток"), _reactDomFactories2.default.th(null, "Control"))), _reactDomFactories2.default.tbody({ className: 'Products' }, products));
+            }
+            /* {
+            return React.createElement(Product, {
+                key: item.code,
+                code: item.code,
+                name: item.name,
+                price: item.price,
+                url: item.url,
+                balance: item.balance,
+                cbSelectedLine: this.selectedLine,
+                cbDeleteProduct: this.deleteProduct,
+                selected: (this.state.highlitedLine == item.code)?true:false,
+            })
+            } */);
+            return _react2.default.createElement(
+                'table',
+                { className: 'IsShop3' },
+                _react2.default.createElement(
+                    'caption',
+                    { className: 'ShopName' },
+                    this.props.shop
+                ),
+                _react2.default.createElement(
+                    'thead',
+                    { className: 'Options' },
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            '"\u041F\u0440\u043E\u0434\u0443\u043A\u0442"'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            '"\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            '"\u0426\u0435\u043D\u0430"'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            '"\u041E\u0441\u0442\u0430\u0442\u043E\u043A"'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            '"Control"'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'tbody',
+                    { className: 'Products' },
+                    products
+                )
+            );
+            /* return DOM.table( {className:'IsShop3'}, 
+                DOM.caption( {className:'ShopName'}, this.props.shop ),
+                DOM.thead( {className: "Options"},
+                    DOM.tr( null, 
+                        DOM.th( null, "Подукт"),
+                        DOM.th( null, "Изображение"),
+                        DOM.th( null, "Цена"),
+                        DOM.th( null, "Отаток"),
+                        DOM.th( null, "Control"),
+                    ) 
+                ),
+                DOM.tbody( {className:'Products'}, products),
+            ); */
         }
     }]);
 
@@ -30440,7 +30514,42 @@ var Product = function (_React$Component) {
     _createClass(Product, [{
         key: 'render',
         value: function render() {
-            return _reactDomFactories2.default.tr({ onClick: this.changeColor, className: this.props.selected ? "selected" : null }, _reactDomFactories2.default.td(null, this.props.name), _reactDomFactories2.default.td(null, _reactDomFactories2.default.img({ src: this.props.url })), _reactDomFactories2.default.td(null, this.props.price), _reactDomFactories2.default.td(null, this.props.balance), _reactDomFactories2.default.td(null, _reactDomFactories2.default.input({ type: "button", value: "Удалить", onClick: this.deleteProduct })));
+            return _react2.default.createElement(
+                'tr',
+                { className: this.props.selected ? "selected" : null, onClick: this.changeColor },
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.props.name
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement('img', { src: this.props.url })
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.props.price
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.props.balance
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement('input', { type: 'button', value: '\u0423\u0434\u0430\u043B\u0438\u0442\u044C', onClick: this.deleteProduct })
+                )
+            );
+            /* DOM.tr( {onClick: this.changeColor, className: this.props.selected?"selected":null},
+                DOM.td( null, this.props.name ),
+                DOM.td( null, DOM.img({src: this.props.url}) ),
+                DOM.td( null, this.props.price ),
+                DOM.td( null, this.props.balance), 
+                DOM.td( null, DOM.input({type: "button", value: "Удалить", onClick: this.deleteProduct}))
+            ) */
         }
     }]);
 

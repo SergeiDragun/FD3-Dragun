@@ -29,12 +29,14 @@ class Product extends React.Component {
     };
 
     render() {
-        return DOM.tr( {onClick: this.changeColor, className: this.props.selected?"selected":null},
-            DOM.td( null, this.props.name ),
-            DOM.td( null, DOM.img({src: this.props.url}) ),
-            DOM.td( null, this.props.price ),
-            DOM.td( null, this.props.balance), 
-            DOM.td( null, DOM.input({type: "button", value: "Удалить", onClick: this.deleteProduct}))
+        return (
+            <tr className={this.props.selected ? "selected" : null} onClick={this.changeColor}>
+                <td>{this.props.name}</td>
+                <td><img src={this.props.url}/></td>
+                <td>{this.props.price}</td>
+                <td>{this.props.balance}</td>
+                <td><input type="button" value="Удалить" onClick={this.deleteProduct}/></td>
+            </tr>
         )
     };
 
