@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DOM from 'react-dom-factories';
 
 import './product.css';
 
@@ -11,16 +10,17 @@ class Product extends React.Component {
         code: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
         url: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
-        cbSelectedLine: PropTypes.func.isRequired,
+        quantity: PropTypes.number.isRequired,
+        cbSelectedProduct: PropTypes.func.isRequired,
         cbDeleteProduct: PropTypes.func.isRequired,
+        cbEditProduct: PropTypes.func.isRequired,
         selected: PropTypes.bool.isRequired,
     };
 
     
-    changeColor = (EO) => {
+    selectProduct = (EO) => {
         EO.stopPropagation();
-        this.props.cbSelectedLine(this.props.code);
+        this.props.cbSelectedProduct(this.props.code);
     };
 
     deleteProduct = (EO) => {
@@ -28,14 +28,22 @@ class Product extends React.Component {
         this.props.cbDeleteProduct(this.props.code);
     };
 
+    editProduct =(EO) => {
+        EO.stopPropagation();
+        this.props.cbEditProduct(this.props.code);
+    }
+
     render() {
         return (
-            <tr className={this.props.selected ? "selected" : null} onClick={this.changeColor}>
+            <tr className={this.props.selected ? "selected" : null} onClick={this.selectProduct}>
                 <td>{this.props.name}</td>
-                <td><img src={this.props.url}/></td>
+                <td><img src={this.props.url} alt={this.props.name}/></td>
                 <td>{this.props.price}</td>
-                <td>{this.props.balance}</td>
-                <td><input type="button" value="Удалить" onClick={this.deleteProduct}/></td>
+                <td>{this.props.quantity}</td>
+                <td>
+                    <input type="button" value="Edit" onClick={this.editProduct}/>
+                    <input type="button" value="Delete" onClick={this.deleteProduct}/>
+                </td>
             </tr>
         )
     };

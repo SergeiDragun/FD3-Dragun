@@ -44,5 +44,17 @@
 
 .Products .selected {
     background-color: red
+}.editProduct {
+    margin-top: 5px;
+}
+
+.editProduct > input[type=button] {
+    cursor: pointer;
+}
+
+.product > span{
+    display: inline-block;
+    width: 70px;
+    background-color: #fff;
 }
 /*# sourceMappingURL=bundle.css.map*/

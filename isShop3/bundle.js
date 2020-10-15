@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -261,9 +261,9 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(10);
+  module.exports = __webpack_require__(9);
 } else {
-  module.exports = __webpack_require__(11);
+  module.exports = __webpack_require__(10);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -369,6 +369,32 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactIs = __webpack_require__(7);
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(22)(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(23)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -382,7 +408,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(4);
+  var ReactPropTypesSecret = __webpack_require__(5);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -476,7 +502,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -495,42 +521,16 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(13);
+} else {
   module.exports = __webpack_require__(14);
-} else {
-  module.exports = __webpack_require__(15);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(7);
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(23)(ReactIs.isElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(24)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -543,9 +543,9 @@ if (process.env.NODE_ENV !== 'production') {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(21);
+  module.exports = __webpack_require__(20);
 } else {
-  module.exports = __webpack_require__(22);
+  module.exports = __webpack_require__(21);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -557,224 +557,22 @@ if (process.env.NODE_ENV === 'production') {
 "use strict";
 
 
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-(function(f) {
-  if (true) {
-    module.exports = f(__webpack_require__(1));
-    /* global define */
-  } else if (typeof define === 'function' && define.amd) {
-    define(['react'], f);
-  } else {
-    var g;
-    if (typeof window !== 'undefined') {
-      g = window;
-    } else if (typeof global !== 'undefined') {
-      g = global;
-    } else if (typeof self !== 'undefined') {
-      g = self;
-    } else {
-      g = this;
-    }
-
-    if (typeof g.React === 'undefined') {
-      throw Error('React module should be required before ReactDOMFactories');
-    }
-
-    g.ReactDOMFactories = f(g.React);
-  }
-})(function(React) {
-  /**
-   * Create a factory that creates HTML tag elements.
-   */
-  function createDOMFactory(type) {
-    var factory = React.createElement.bind(null, type);
-    // Expose the type on the factory and the prototype so that it can be
-    // easily accessed on elements. E.g. `<Foo />.type === Foo`.
-    // This should not be named `constructor` since this may not be the function
-    // that created the element, and it may not even be a constructor.
-    factory.type = type;
-    return factory;
-  };
-
-  /**
-   * Creates a mapping from supported HTML tags to `ReactDOMComponent` classes.
-   */
-  var ReactDOMFactories = {
-    a: createDOMFactory('a'),
-    abbr: createDOMFactory('abbr'),
-    address: createDOMFactory('address'),
-    area: createDOMFactory('area'),
-    article: createDOMFactory('article'),
-    aside: createDOMFactory('aside'),
-    audio: createDOMFactory('audio'),
-    b: createDOMFactory('b'),
-    base: createDOMFactory('base'),
-    bdi: createDOMFactory('bdi'),
-    bdo: createDOMFactory('bdo'),
-    big: createDOMFactory('big'),
-    blockquote: createDOMFactory('blockquote'),
-    body: createDOMFactory('body'),
-    br: createDOMFactory('br'),
-    button: createDOMFactory('button'),
-    canvas: createDOMFactory('canvas'),
-    caption: createDOMFactory('caption'),
-    cite: createDOMFactory('cite'),
-    code: createDOMFactory('code'),
-    col: createDOMFactory('col'),
-    colgroup: createDOMFactory('colgroup'),
-    data: createDOMFactory('data'),
-    datalist: createDOMFactory('datalist'),
-    dd: createDOMFactory('dd'),
-    del: createDOMFactory('del'),
-    details: createDOMFactory('details'),
-    dfn: createDOMFactory('dfn'),
-    dialog: createDOMFactory('dialog'),
-    div: createDOMFactory('div'),
-    dl: createDOMFactory('dl'),
-    dt: createDOMFactory('dt'),
-    em: createDOMFactory('em'),
-    embed: createDOMFactory('embed'),
-    fieldset: createDOMFactory('fieldset'),
-    figcaption: createDOMFactory('figcaption'),
-    figure: createDOMFactory('figure'),
-    footer: createDOMFactory('footer'),
-    form: createDOMFactory('form'),
-    h1: createDOMFactory('h1'),
-    h2: createDOMFactory('h2'),
-    h3: createDOMFactory('h3'),
-    h4: createDOMFactory('h4'),
-    h5: createDOMFactory('h5'),
-    h6: createDOMFactory('h6'),
-    head: createDOMFactory('head'),
-    header: createDOMFactory('header'),
-    hgroup: createDOMFactory('hgroup'),
-    hr: createDOMFactory('hr'),
-    html: createDOMFactory('html'),
-    i: createDOMFactory('i'),
-    iframe: createDOMFactory('iframe'),
-    img: createDOMFactory('img'),
-    input: createDOMFactory('input'),
-    ins: createDOMFactory('ins'),
-    kbd: createDOMFactory('kbd'),
-    keygen: createDOMFactory('keygen'),
-    label: createDOMFactory('label'),
-    legend: createDOMFactory('legend'),
-    li: createDOMFactory('li'),
-    link: createDOMFactory('link'),
-    main: createDOMFactory('main'),
-    map: createDOMFactory('map'),
-    mark: createDOMFactory('mark'),
-    menu: createDOMFactory('menu'),
-    menuitem: createDOMFactory('menuitem'),
-    meta: createDOMFactory('meta'),
-    meter: createDOMFactory('meter'),
-    nav: createDOMFactory('nav'),
-    noscript: createDOMFactory('noscript'),
-    object: createDOMFactory('object'),
-    ol: createDOMFactory('ol'),
-    optgroup: createDOMFactory('optgroup'),
-    option: createDOMFactory('option'),
-    output: createDOMFactory('output'),
-    p: createDOMFactory('p'),
-    param: createDOMFactory('param'),
-    picture: createDOMFactory('picture'),
-    pre: createDOMFactory('pre'),
-    progress: createDOMFactory('progress'),
-    q: createDOMFactory('q'),
-    rp: createDOMFactory('rp'),
-    rt: createDOMFactory('rt'),
-    ruby: createDOMFactory('ruby'),
-    s: createDOMFactory('s'),
-    samp: createDOMFactory('samp'),
-    script: createDOMFactory('script'),
-    section: createDOMFactory('section'),
-    select: createDOMFactory('select'),
-    small: createDOMFactory('small'),
-    source: createDOMFactory('source'),
-    span: createDOMFactory('span'),
-    strong: createDOMFactory('strong'),
-    style: createDOMFactory('style'),
-    sub: createDOMFactory('sub'),
-    summary: createDOMFactory('summary'),
-    sup: createDOMFactory('sup'),
-    table: createDOMFactory('table'),
-    tbody: createDOMFactory('tbody'),
-    td: createDOMFactory('td'),
-    textarea: createDOMFactory('textarea'),
-    tfoot: createDOMFactory('tfoot'),
-    th: createDOMFactory('th'),
-    thead: createDOMFactory('thead'),
-    time: createDOMFactory('time'),
-    title: createDOMFactory('title'),
-    tr: createDOMFactory('tr'),
-    track: createDOMFactory('track'),
-    u: createDOMFactory('u'),
-    ul: createDOMFactory('ul'),
-    var: createDOMFactory('var'),
-    video: createDOMFactory('video'),
-    wbr: createDOMFactory('wbr'),
-
-    // SVG
-    circle: createDOMFactory('circle'),
-    clipPath: createDOMFactory('clipPath'),
-    defs: createDOMFactory('defs'),
-    ellipse: createDOMFactory('ellipse'),
-    g: createDOMFactory('g'),
-    image: createDOMFactory('image'),
-    line: createDOMFactory('line'),
-    linearGradient: createDOMFactory('linearGradient'),
-    mask: createDOMFactory('mask'),
-    path: createDOMFactory('path'),
-    pattern: createDOMFactory('pattern'),
-    polygon: createDOMFactory('polygon'),
-    polyline: createDOMFactory('polyline'),
-    radialGradient: createDOMFactory('radialGradient'),
-    rect: createDOMFactory('rect'),
-    stop: createDOMFactory('stop'),
-    svg: createDOMFactory('svg'),
-    text: createDOMFactory('text'),
-    tspan: createDOMFactory('tspan'),
-  };
-
-  // due to wrapper and conditionals at the top, this will either become
-  // `module.exports ReactDOMFactories` if that is available,
-  // otherwise it will be defined via `define(['react'], ReactDOMFactories)`
-  // if that is available,
-  // otherwise it will be defined as global variable.
-  return ReactDOMFactories;
-});
-
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(11);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Shop = __webpack_require__(20);
+var _Shop = __webpack_require__(19);
 
 var _Shop2 = _interopRequireDefault(_Shop);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var shopName = "Продуктовый магазин";
-var productListArr = __webpack_require__(28);
+var productListArr = __webpack_require__(32);
 
 _reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
     shop: shopName,
@@ -782,7 +580,7 @@ _reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
 }), document.getElementById("container"));
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -814,7 +612,7 @@ exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.u
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -836,7 +634,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var _assign = __webpack_require__(2);
-var checkPropTypes = __webpack_require__(3);
+var checkPropTypes = __webpack_require__(4);
 
 var ReactVersion = '16.13.1';
 
@@ -2734,7 +2532,7 @@ exports.version = ReactVersion;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2772,15 +2570,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(13);
+  module.exports = __webpack_require__(12);
 } else {
-  module.exports = __webpack_require__(16);
+  module.exports = __webpack_require__(15);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2796,7 +2594,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(5);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
+var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(6);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
 function ba(a,b,c,d,e,f,g,h,k){var l=Array.prototype.slice.call(arguments,3);try{b.apply(c,l)}catch(m){this.onError(m)}}var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,k){da=!1;ea=null;ba.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,k){ja.apply(this,arguments);if(da){if(da){var l=ea;da=!1;ea=null}else throw Error(u(198));fa||(fa=!0,ha=l)}}var la=null,ma=null,na=null;
 function oa(a,b,c){var d=a.type||"unknown-event";a.currentTarget=na(c);ka(d,b,void 0,a);a.currentTarget=null}var pa=null,qa={};
 function ra(){if(pa)for(var a in qa){var b=qa[a],c=pa.indexOf(a);if(!(-1<c))throw Error(u(96,a));if(!sa[c]){if(!b.extractEvents)throw Error(u(97,a));sa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;if(ta.hasOwnProperty(h))throw Error(u(99,h));ta[h]=f;var k=f.phasedRegistrationNames;if(k){for(e in k)k.hasOwnProperty(e)&&ua(k[e],g,h);e=!0}else f.registrationName?(ua(f.registrationName,g,h),e=!0):e=!1;if(!e)throw Error(u(98,d,a));}}}}
@@ -3079,7 +2877,7 @@ exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Er
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3107,7 +2905,7 @@ exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3973,7 +3771,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3996,9 +3794,9 @@ if (process.env.NODE_ENV !== "production") {
 
 var React = __webpack_require__(1);
 var _assign = __webpack_require__(2);
-var Scheduler = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(3);
-var tracing = __webpack_require__(17);
+var Scheduler = __webpack_require__(6);
+var checkPropTypes = __webpack_require__(4);
+var tracing = __webpack_require__(16);
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
 // Current owner and dispatcher used to share the same ref,
@@ -28993,22 +28791,22 @@ exports.version = ReactVersion;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(18);
+  module.exports = __webpack_require__(17);
 } else {
-  module.exports = __webpack_require__(19);
+  module.exports = __webpack_require__(18);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29025,7 +28823,7 @@ var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unst
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29382,7 +29180,7 @@ exports.unstable_wrap = unstable_wrap;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29398,19 +29196,23 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDomFactories = __webpack_require__(8);
+__webpack_require__(24);
 
-var _reactDomFactories2 = _interopRequireDefault(_reactDomFactories);
-
-__webpack_require__(25);
-
-var _Product = __webpack_require__(26);
+var _Product = __webpack_require__(25);
 
 var _Product2 = _interopRequireDefault(_Product);
+
+var _ProductDescription = __webpack_require__(28);
+
+var _ProductDescription2 = _interopRequireDefault(_ProductDescription);
+
+var _EditProduct = __webpack_require__(30);
+
+var _EditProduct2 = _interopRequireDefault(_EditProduct);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29436,20 +29238,92 @@ var IsShop3 = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = IsShop3.__proto__ || Object.getPrototypeOf(IsShop3)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             highlitedLine: 0,
-            productList: _this.props.productList
-        }, _this.selectedLine = function (code) {
-            _this.setState({ highlitedLine: code });
+            productList: _this.props.productList,
+            displayProduct: false,
+            workModeDescription: 0, // 0 - не показывать описание продукта, 1 - показывать
+            workModeEdit: 0, // 0 - не показывать, 1 - редактировать, 2 - добавить новый
+            currentProduct: null,
+            editedProduct: null
+        }, _this.selectedProduct = function (code) {
+            var currentProduct = _this.state.productList.slice();
+            currentProduct = currentProduct.filter(function (item) {
+                return item.code == code;
+            })[0];
+            _this.setState({
+                currentProduct: currentProduct,
+                workModeDescription: 1,
+                highlitedLine: code,
+                workModeEdit: 0
+            });
+        }, _this.editProduct = function (code) {
+            var editedProduct = _this.state.productList.slice();
+            editedProduct = editedProduct.filter(function (item) {
+                return item.code == code;
+            })[0];
+            console;
+            _this.setState({
+                workModeDescription: 0,
+                workModeEdit: 1,
+                editedProduct: editedProduct,
+                highlitedLine: code
+            });
         }, _this.deleteProduct = function (code) {
             var consent = confirm("Вы хотите удалить товар?");
             if (consent) {
+                var delProductCode = void 0;
                 var delProduct = _this.state.productList.slice();
                 delProduct = delProduct.filter(function (item) {
+                    if (item.code != code) {
+                        delProductCode = code;
+                    }
                     return item.code != code;
                 });
-                _this.setState({ productList: delProduct });
+                console.log(delProductCode);
+                if (_this.state.currentProduct && delProductCode == _this.state.currentProduct.code) {
+                    _this.setState({ productList: delProduct, workModeDescription: 0 });
+                } else if (_this.state.editedProduct && delProductCode == _this.state.editedProduct.code) {
+                    _this.setState({ productList: delProduct, workModeEdit: 0 });
+                } else {
+                    _this.setState({ productList: delProduct });
+                }
             }
+        }, _this.saveChanges = function () {
+            console.log("соxраняю");
+        }, _this.cancelChanges = function () {
+            console.log("отменяю");
+        }, _this.newProduct = function (EO) {
+            console.log("Создаю новый");
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
+
+    /* editName = (newName) => {
+        let editedProduct = this.state.editedProduct;
+        editedProduct.name = newName;
+        this.setState({
+            editedProduct: editedProduct,
+        })
+    }
+      editURL = (newURL) => {
+        let editedProduct = this.state.editedProduct;
+        editedProduct.url = newURL;
+        this.setState({
+            editedProduct: editedProduct,
+        })
+    }
+      editPrice = (newPrice) => {
+        let editedProduct = this.state.editedProduct;
+        editedProduct.price = newPrice;
+        this.setState({
+            editedProduct: editedProduct,
+        })
+    }
+      editQuantity = (newQuantity) => {
+        let editedProduct = this.state.editedProduct;
+        editedProduct.quantity = newQuantity;
+        this.setState({
+            editedProduct: editedProduct,
+        })
+    } */
 
     _createClass(IsShop3, [{
         key: 'render',
@@ -29463,58 +29337,82 @@ var IsShop3 = function (_React$Component) {
                     name: item.name,
                     price: item.price,
                     url: item.url,
-                    balance: item.balance,
-                    cbSelectedLine: _this2.selectedLine,
+                    quantity: item.quantity,
+                    cbSelectedProduct: _this2.selectedProduct,
                     cbDeleteProduct: _this2.deleteProduct,
-                    selected: _this2.state.highlitedLine == item.code && true
+                    cbEditProduct: _this2.editProduct,
+                    selected: _this2.state.highlitedLine == item.code ? true : false
                 });
             });
             return _react2.default.createElement(
-                'table',
-                { className: 'IsShop3' },
+                _react.Fragment,
+                null,
                 _react2.default.createElement(
-                    'caption',
-                    { className: 'ShopName' },
-                    this.props.shop
-                ),
-                _react2.default.createElement(
-                    'thead',
-                    { className: 'Options' },
+                    'table',
+                    { className: 'IsShop3' },
                     _react2.default.createElement(
-                        'tr',
-                        null,
+                        'caption',
+                        { className: 'ShopName' },
+                        this.props.shop
+                    ),
+                    _react2.default.createElement(
+                        'thead',
+                        { className: 'Options' },
                         _react2.default.createElement(
-                            'th',
+                            'tr',
                             null,
-                            '"\u041F\u0440\u043E\u0434\u0443\u043A\u0442"'
-                        ),
-                        _react2.default.createElement(
-                            'th',
-                            null,
-                            '"\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"'
-                        ),
-                        _react2.default.createElement(
-                            'th',
-                            null,
-                            '"\u0426\u0435\u043D\u0430"'
-                        ),
-                        _react2.default.createElement(
-                            'th',
-                            null,
-                            '"\u041E\u0441\u0442\u0430\u0442\u043E\u043A"'
-                        ),
-                        _react2.default.createElement(
-                            'th',
-                            null,
-                            '"Control"'
+                            _react2.default.createElement(
+                                'th',
+                                null,
+                                'Name'
+                            ),
+                            _react2.default.createElement(
+                                'th',
+                                null,
+                                'URL'
+                            ),
+                            _react2.default.createElement(
+                                'th',
+                                null,
+                                'Price'
+                            ),
+                            _react2.default.createElement(
+                                'th',
+                                null,
+                                'Quantity'
+                            ),
+                            _react2.default.createElement(
+                                'th',
+                                null,
+                                'Control'
+                            )
                         )
+                    ),
+                    _react2.default.createElement(
+                        'tbody',
+                        { className: 'Products' },
+                        products
                     )
                 ),
-                _react2.default.createElement(
-                    'tbody',
-                    { className: 'Products' },
-                    products
-                )
+                _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct }),
+                this.state.workModeDescription == 1 && _react2.default.createElement(_ProductDescription2.default, {
+                    workmode: this.state.workModeDescription,
+                    name: this.state.currentProduct.name,
+                    code: this.state.currentProduct.code,
+                    price: this.state.currentProduct.price,
+                    url: this.state.currentProduct.url,
+                    quantity: this.state.currentProduct.quantity
+                }),
+                this.state.workModeEdit == 1 && _react2.default.createElement(_EditProduct2.default, {
+                    workMode: this.state.workModeEdit,
+                    editedProduct: this.state.editedProduct
+                    /* cbEditName={this.editName}
+                    cbEditURL={this.editURL}
+                    cbEditPrice={this.editPrice}
+                    cbEditQuantity={this.editQuantity} */
+                    , cbSaveChanges: this.saveChanges,
+                    cbCancelChanges: this.cancelChanges
+                })
             );
         }
     }]);
@@ -29529,7 +29427,7 @@ IsShop3.propTypes = {
         code: _propTypes2.default.number.isRequired,
         price: _propTypes2.default.number.isRequired,
         url: _propTypes2.default.string.isRequired,
-        balance: _propTypes2.default.number.isRequired
+        quantity: _propTypes2.default.number.isRequired
     }))
 };
 ;
@@ -29541,7 +29439,7 @@ IsShop3.defaultProps = {
 exports.default = IsShop3;
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29563,7 +29461,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29752,7 +29650,7 @@ exports.typeOf = typeOf;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29768,8 +29666,8 @@ exports.typeOf = typeOf;
 var ReactIs = __webpack_require__(7);
 var assign = __webpack_require__(2);
 
-var ReactPropTypesSecret = __webpack_require__(4);
-var checkPropTypes = __webpack_require__(3);
+var ReactPropTypesSecret = __webpack_require__(5);
+var checkPropTypes = __webpack_require__(4);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -30351,7 +30249,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30364,7 +30262,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(4);
+var ReactPropTypesSecret = __webpack_require__(5);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -30422,13 +30320,13 @@ module.exports = function() {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30444,11 +30342,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDomFactories = __webpack_require__(8);
+var _reactDomFactories = __webpack_require__(26);
 
 var _reactDomFactories2 = _interopRequireDefault(_reactDomFactories);
 
@@ -30538,6 +30436,208 @@ Product.propTypes = {
 exports.default = Product;
 
 /***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+(function(f) {
+  if (true) {
+    module.exports = f(__webpack_require__(1));
+    /* global define */
+  } else if (typeof define === 'function' && define.amd) {
+    define(['react'], f);
+  } else {
+    var g;
+    if (typeof window !== 'undefined') {
+      g = window;
+    } else if (typeof global !== 'undefined') {
+      g = global;
+    } else if (typeof self !== 'undefined') {
+      g = self;
+    } else {
+      g = this;
+    }
+
+    if (typeof g.React === 'undefined') {
+      throw Error('React module should be required before ReactDOMFactories');
+    }
+
+    g.ReactDOMFactories = f(g.React);
+  }
+})(function(React) {
+  /**
+   * Create a factory that creates HTML tag elements.
+   */
+  function createDOMFactory(type) {
+    var factory = React.createElement.bind(null, type);
+    // Expose the type on the factory and the prototype so that it can be
+    // easily accessed on elements. E.g. `<Foo />.type === Foo`.
+    // This should not be named `constructor` since this may not be the function
+    // that created the element, and it may not even be a constructor.
+    factory.type = type;
+    return factory;
+  };
+
+  /**
+   * Creates a mapping from supported HTML tags to `ReactDOMComponent` classes.
+   */
+  var ReactDOMFactories = {
+    a: createDOMFactory('a'),
+    abbr: createDOMFactory('abbr'),
+    address: createDOMFactory('address'),
+    area: createDOMFactory('area'),
+    article: createDOMFactory('article'),
+    aside: createDOMFactory('aside'),
+    audio: createDOMFactory('audio'),
+    b: createDOMFactory('b'),
+    base: createDOMFactory('base'),
+    bdi: createDOMFactory('bdi'),
+    bdo: createDOMFactory('bdo'),
+    big: createDOMFactory('big'),
+    blockquote: createDOMFactory('blockquote'),
+    body: createDOMFactory('body'),
+    br: createDOMFactory('br'),
+    button: createDOMFactory('button'),
+    canvas: createDOMFactory('canvas'),
+    caption: createDOMFactory('caption'),
+    cite: createDOMFactory('cite'),
+    code: createDOMFactory('code'),
+    col: createDOMFactory('col'),
+    colgroup: createDOMFactory('colgroup'),
+    data: createDOMFactory('data'),
+    datalist: createDOMFactory('datalist'),
+    dd: createDOMFactory('dd'),
+    del: createDOMFactory('del'),
+    details: createDOMFactory('details'),
+    dfn: createDOMFactory('dfn'),
+    dialog: createDOMFactory('dialog'),
+    div: createDOMFactory('div'),
+    dl: createDOMFactory('dl'),
+    dt: createDOMFactory('dt'),
+    em: createDOMFactory('em'),
+    embed: createDOMFactory('embed'),
+    fieldset: createDOMFactory('fieldset'),
+    figcaption: createDOMFactory('figcaption'),
+    figure: createDOMFactory('figure'),
+    footer: createDOMFactory('footer'),
+    form: createDOMFactory('form'),
+    h1: createDOMFactory('h1'),
+    h2: createDOMFactory('h2'),
+    h3: createDOMFactory('h3'),
+    h4: createDOMFactory('h4'),
+    h5: createDOMFactory('h5'),
+    h6: createDOMFactory('h6'),
+    head: createDOMFactory('head'),
+    header: createDOMFactory('header'),
+    hgroup: createDOMFactory('hgroup'),
+    hr: createDOMFactory('hr'),
+    html: createDOMFactory('html'),
+    i: createDOMFactory('i'),
+    iframe: createDOMFactory('iframe'),
+    img: createDOMFactory('img'),
+    input: createDOMFactory('input'),
+    ins: createDOMFactory('ins'),
+    kbd: createDOMFactory('kbd'),
+    keygen: createDOMFactory('keygen'),
+    label: createDOMFactory('label'),
+    legend: createDOMFactory('legend'),
+    li: createDOMFactory('li'),
+    link: createDOMFactory('link'),
+    main: createDOMFactory('main'),
+    map: createDOMFactory('map'),
+    mark: createDOMFactory('mark'),
+    menu: createDOMFactory('menu'),
+    menuitem: createDOMFactory('menuitem'),
+    meta: createDOMFactory('meta'),
+    meter: createDOMFactory('meter'),
+    nav: createDOMFactory('nav'),
+    noscript: createDOMFactory('noscript'),
+    object: createDOMFactory('object'),
+    ol: createDOMFactory('ol'),
+    optgroup: createDOMFactory('optgroup'),
+    option: createDOMFactory('option'),
+    output: createDOMFactory('output'),
+    p: createDOMFactory('p'),
+    param: createDOMFactory('param'),
+    picture: createDOMFactory('picture'),
+    pre: createDOMFactory('pre'),
+    progress: createDOMFactory('progress'),
+    q: createDOMFactory('q'),
+    rp: createDOMFactory('rp'),
+    rt: createDOMFactory('rt'),
+    ruby: createDOMFactory('ruby'),
+    s: createDOMFactory('s'),
+    samp: createDOMFactory('samp'),
+    script: createDOMFactory('script'),
+    section: createDOMFactory('section'),
+    select: createDOMFactory('select'),
+    small: createDOMFactory('small'),
+    source: createDOMFactory('source'),
+    span: createDOMFactory('span'),
+    strong: createDOMFactory('strong'),
+    style: createDOMFactory('style'),
+    sub: createDOMFactory('sub'),
+    summary: createDOMFactory('summary'),
+    sup: createDOMFactory('sup'),
+    table: createDOMFactory('table'),
+    tbody: createDOMFactory('tbody'),
+    td: createDOMFactory('td'),
+    textarea: createDOMFactory('textarea'),
+    tfoot: createDOMFactory('tfoot'),
+    th: createDOMFactory('th'),
+    thead: createDOMFactory('thead'),
+    time: createDOMFactory('time'),
+    title: createDOMFactory('title'),
+    tr: createDOMFactory('tr'),
+    track: createDOMFactory('track'),
+    u: createDOMFactory('u'),
+    ul: createDOMFactory('ul'),
+    var: createDOMFactory('var'),
+    video: createDOMFactory('video'),
+    wbr: createDOMFactory('wbr'),
+
+    // SVG
+    circle: createDOMFactory('circle'),
+    clipPath: createDOMFactory('clipPath'),
+    defs: createDOMFactory('defs'),
+    ellipse: createDOMFactory('ellipse'),
+    g: createDOMFactory('g'),
+    image: createDOMFactory('image'),
+    line: createDOMFactory('line'),
+    linearGradient: createDOMFactory('linearGradient'),
+    mask: createDOMFactory('mask'),
+    path: createDOMFactory('path'),
+    pattern: createDOMFactory('pattern'),
+    polygon: createDOMFactory('polygon'),
+    polyline: createDOMFactory('polyline'),
+    radialGradient: createDOMFactory('radialGradient'),
+    rect: createDOMFactory('rect'),
+    stop: createDOMFactory('stop'),
+    svg: createDOMFactory('svg'),
+    text: createDOMFactory('text'),
+    tspan: createDOMFactory('tspan'),
+  };
+
+  // due to wrapper and conditionals at the top, this will either become
+  // `module.exports ReactDOMFactories` if that is available,
+  // otherwise it will be defined via `define(['react'], ReactDOMFactories)`
+  // if that is available,
+  // otherwise it will be defined as global variable.
+  return ReactDOMFactories;
+});
+
+
+
+/***/ }),
 /* 27 */
 /***/ (function(module, exports) {
 
@@ -30545,6 +30645,280 @@ exports.default = Product;
 
 /***/ }),
 /* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(29);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProductDescription = function (_React$Component) {
+    _inherits(ProductDescription, _React$Component);
+
+    function ProductDescription() {
+        _classCallCheck(this, ProductDescription);
+
+        return _possibleConstructorReturn(this, (ProductDescription.__proto__ || Object.getPrototypeOf(ProductDescription)).apply(this, arguments));
+    }
+
+    _createClass(ProductDescription, [{
+        key: 'render',
+        value: function render() {
+            return this.props.workmode == 1 && _react2.default.createElement(
+                'div',
+                { className: 'productDescription' },
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'ID: ',
+                    this.props.code.toString()
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Name: ',
+                    this.props.name
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('img', { src: this.props.url })
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Price: ',
+                    this.props.price.toString()
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Quantity: ',
+                    this.props.quantity.toString()
+                )
+            );
+        }
+    }]);
+
+    return ProductDescription;
+}(_react2.default.Component);
+
+ProductDescription.propTypes = {
+    code: _propTypes2.default.number.isRequired,
+    name: _propTypes2.default.string.isRequired,
+    url: _propTypes2.default.string.isRequired,
+    price: _propTypes2.default.number.isRequired,
+    quantity: _propTypes2.default.number.isRequired,
+    workmode: _propTypes2.default.number.isRequired
+};
+exports.default = ProductDescription;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(31);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditProduct = function (_React$Component) {
+    _inherits(EditProduct, _React$Component);
+
+    function EditProduct() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, EditProduct);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            name: _this.props.editedProduct.name,
+            code: _this.props.editedProduct.code,
+            URL: _this.props.editedProduct.url,
+            price: _this.props.editedProduct.price,
+            quantity: _this.props.editedProduct.quantity
+        }, _this.editName = function (EO) {
+            _this.setState({
+                name: EO.target.value
+            });
+            console.log(_this.state.name);
+        }, _this.editURL = function (EO) {
+            _this.setState({
+                URL: EO.target.value
+            });
+        }, _this.editPrice = function (EO) {
+            _this.setState({
+                price: EO.target.value
+            });
+        }, _this.editQuantity = function (EO) {
+            _this.setState({
+                quantity: EO.target.value
+            });
+        }, _this.saveChanges = function () {
+            _this.props.cbSaveChanges();
+        }, _this.cancelChanges = function () {
+            _this.props.cbCancelChanges();
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(EditProduct, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'editProduct' },
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'ID: ',
+                    this.state.code
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'product' },
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'Name:'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.name,
+                        onChange: this.editName
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'product' },
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'URL:'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.URL,
+                        onChange: this.editURL
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'product' },
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'Price:'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.price,
+                        onChange: this.editPrice
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'product' },
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'Quantity:'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.quantity,
+                        onChange: this.editQuantity
+                    })
+                ),
+                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.saveChanges }),
+                _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancelChanges })
+            );
+        }
+    }]);
+
+    return EditProduct;
+}(_react2.default.Component);
+
+EditProduct.propTypes = {
+    editedProduct: _propTypes2.default.shape({
+        name: _propTypes2.default.string.isRequired,
+        code: _propTypes2.default.number.isRequired,
+        price: _propTypes2.default.number.isRequired,
+        url: _propTypes2.default.string.isRequired,
+        quantity: _propTypes2.default.number.isRequired
+    }),
+    workMode: _propTypes2.default.number.isRequired,
+    /* cbEditName: PropTypes.func.isRequired,
+    cbEditURL: PropTypes.func.isRequired,
+    cbEditPrice: PropTypes.func.isRequired,
+    cbEditQuantity: PropTypes.func.isRequired, */
+    cbSaveChanges: _propTypes2.default.func.isRequired,
+    cbCancelChanges: _propTypes2.default.func.isRequired
+};
+exports.default = EditProduct;
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = [{"name":"Молоко","code":1,"price":10,"url":"https://cutt.ly/Sf9fhLB","balance":8},{"name":"Кефир","code":2,"price":11,"url":"https://cutt.ly/pf9fnR6","balance":9},{"name":"Колбаса","code":4,"price":24,"url":"https://cutt.ly/nf9fDpm","balance":15},{"name":"Мясо","code":5,"price":35,"url":"https://cutt.ly/of9fLJQ","balance":6},{"name":"Конфеты","code":7,"price":6,"url":"https://cutt.ly/Xf9gqVU","balance":14},{"name":"Печенье","code":8,"price":4,"url":"https://cutt.ly/Pf9gp5A","balance":53},{"name":"Огурцы","code":10,"price":2,"url":"https://cutt.ly/Mf9gjAu","balance":75},{"name":"Помидоры","code":11,"price":3,"url":"https://cutt.ly/jf9gzFe","balance":57}]

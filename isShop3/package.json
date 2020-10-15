@@ -5,7 +5,7 @@
   "main": "App.js",
   "scripts": {
     "build": ".\\node_modules\\.bin\\webpack",
-    "start:dev": "webpack-dev-server"
+    "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors"
   },
   "repository": {
     "type": "git",

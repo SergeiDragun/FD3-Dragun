@@ -24,3 +24,7 @@
     font-size: 1em;
     text-align: center;
 }
+
+.Options > tr > th:last-child {
+    width: 120px;
+}
