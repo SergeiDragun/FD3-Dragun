@@ -24,6 +24,10 @@
     font-size: 1em;
     text-align: center;
 }
+
+.Options > tr > th:last-child {
+    width: 120px;
+}
 .Products > tr td {
     padding: 1px;
     font-size: 1em;
@@ -33,7 +37,7 @@
 }
 
 .Products > tr > td > input {
-    width: 100%;
+    width: 50%;
     cursor: pointer;
 }
 
@@ -44,6 +48,8 @@
 
 .Products .selected {
     background-color: red
+}.productDescription > span {
+    display: block;
 }.editProduct {
     margin-top: 5px;
 }

@@ -1,58 +1,58 @@
 [
     {
       "name":"Молоко",
-      "code":1,
-      "price":10,
+      "code":"1",
+      "price":"10",
       "url":"https://cutt.ly/Sf9fhLB",
-      "quantity":8
+      "quantity":"8"
     },
     {
       "name":"Кефир",
-      "code":2,
-      "price":11,
+      "code":"2",
+      "price":"11",
       "url":"https://cutt.ly/pf9fnR6",
-      "quantity":9
+      "quantity":"9"
     },
     {
       "name":"Колбаса",
-      "code":4,
-      "price":24,
+      "code":"3",
+      "price":"24",
       "url":"https://cutt.ly/nf9fDpm",
-      "quantity":15
+      "quantity":"15"
     },
     {
       "name":"Мясо",
-      "code":5,
-      "price":35,
+      "code":"4",
+      "price":"35",
       "url":"https://cutt.ly/of9fLJQ",
-      "quantity":6
+      "quantity":"6"
     },
     {
       "name":"Конфеты",
-      "code":7,
-      "price":6,
+      "code":"5",
+      "price":"6",
       "url":"https://cutt.ly/Xf9gqVU",
-      "quantity":14
+      "quantity":"14"
     },
     {
       "name":"Печенье",
-      "code":8,
-      "price":4,
+      "code":"6",
+      "price":"4",
       "url":"https://cutt.ly/Pf9gp5A",
-      "quantity":53
+      "quantity":"53"
     },
     {
       "name":"Огурцы",
-      "code":10,
-      "price":2,
+      "code":"7",
+      "price":"2",
       "url":"https://cutt.ly/Mf9gjAu",
-      "quantity":75
+      "quantity":"75"
     },
     {
       "name":"Помидоры",
-      "code":11,
-      "price":3,
+      "code":"8",
+      "price":"3",
       "url":"https://cutt.ly/jf9gzFe",
-      "quantity":57
+      "quantity":"57"
     }
   ]

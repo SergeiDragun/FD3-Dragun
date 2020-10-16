@@ -572,7 +572,7 @@ var _Shop2 = _interopRequireDefault(_Shop);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var shopName = "Продуктовый магазин";
-var productListArr = __webpack_require__(32);
+var productListArr = __webpack_require__(31);
 
 _reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
     shop: shopName,
@@ -29206,11 +29206,11 @@ var _Product = __webpack_require__(25);
 
 var _Product2 = _interopRequireDefault(_Product);
 
-var _ProductDescription = __webpack_require__(28);
+var _ProductDescription = __webpack_require__(27);
 
 var _ProductDescription2 = _interopRequireDefault(_ProductDescription);
 
-var _EditProduct = __webpack_require__(30);
+var _EditProduct = __webpack_require__(29);
 
 var _EditProduct2 = _interopRequireDefault(_EditProduct);
 
@@ -29246,9 +29246,9 @@ var IsShop3 = function (_React$Component) {
             editedProduct: null
         }, _this.selectedProduct = function (code) {
             var currentProduct = _this.state.productList.slice();
-            currentProduct = currentProduct.filter(function (item) {
+            currentProduct = currentProduct.find(function (item) {
                 return item.code == code;
-            })[0];
+            });
             _this.setState({
                 currentProduct: currentProduct,
                 workModeDescription: 1,
@@ -29257,9 +29257,9 @@ var IsShop3 = function (_React$Component) {
             });
         }, _this.editProduct = function (code) {
             var editedProduct = _this.state.productList.slice();
-            editedProduct = editedProduct.filter(function (item) {
+            editedProduct = editedProduct.find(function (item) {
                 return item.code == code;
-            })[0];
+            });
             console;
             _this.setState({
                 workModeDescription: 0,
@@ -29272,13 +29272,12 @@ var IsShop3 = function (_React$Component) {
             if (consent) {
                 var delProductCode = void 0;
                 var delProduct = _this.state.productList.slice();
-                delProduct = delProduct.filter(function (item) {
+                delProduct = delProduct.find(function (item) {
                     if (item.code != code) {
                         delProductCode = code;
                     }
                     return item.code != code;
                 });
-                console.log(delProductCode);
                 if (_this.state.currentProduct && delProductCode == _this.state.currentProduct.code) {
                     _this.setState({ productList: delProduct, workModeDescription: 0 });
                 } else if (_this.state.editedProduct && delProductCode == _this.state.editedProduct.code) {
@@ -29293,37 +29292,11 @@ var IsShop3 = function (_React$Component) {
             console.log("отменяю");
         }, _this.newProduct = function (EO) {
             console.log("Создаю новый");
+            _this.setState({
+                workModeEdit: 2
+            });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
-
-    /* editName = (newName) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.name = newName;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-      editURL = (newURL) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.url = newURL;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-      editPrice = (newPrice) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.price = newPrice;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-      editQuantity = (newQuantity) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.quantity = newQuantity;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    } */
 
     _createClass(IsShop3, [{
         key: 'render',
@@ -29403,14 +29376,10 @@ var IsShop3 = function (_React$Component) {
                     url: this.state.currentProduct.url,
                     quantity: this.state.currentProduct.quantity
                 }),
-                this.state.workModeEdit == 1 && _react2.default.createElement(_EditProduct2.default, {
+                (this.state.workModeEdit == 1 || this.state.workModeEdit == 2) && _react2.default.createElement(_EditProduct2.default, {
                     workMode: this.state.workModeEdit,
-                    editedProduct: this.state.editedProduct
-                    /* cbEditName={this.editName}
-                    cbEditURL={this.editURL}
-                    cbEditPrice={this.editPrice}
-                    cbEditQuantity={this.editQuantity} */
-                    , cbSaveChanges: this.saveChanges,
+                    editedProduct: this.state.editedProduct,
+                    cbSaveChanges: this.saveChanges,
                     cbCancelChanges: this.cancelChanges
                 })
             );
@@ -30346,11 +30315,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDomFactories = __webpack_require__(26);
-
-var _reactDomFactories2 = _interopRequireDefault(_reactDomFactories);
-
-__webpack_require__(27);
+__webpack_require__(26);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30374,12 +30339,15 @@ var Product = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Product.__proto__ || Object.getPrototypeOf(Product)).call.apply(_ref, [this].concat(args))), _this), _this.changeColor = function (EO) {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Product.__proto__ || Object.getPrototypeOf(Product)).call.apply(_ref, [this].concat(args))), _this), _this.selectProduct = function (EO) {
             EO.stopPropagation();
-            _this.props.cbSelectedLine(_this.props.code);
+            _this.props.cbSelectedProduct(_this.props.code);
         }, _this.deleteProduct = function (EO) {
             EO.stopPropagation();
             _this.props.cbDeleteProduct(_this.props.code);
+        }, _this.editProduct = function (EO) {
+            EO.stopPropagation();
+            _this.props.cbEditProduct(_this.props.code);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -30388,7 +30356,7 @@ var Product = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'tr',
-                { className: this.props.selected ? "selected" : null, onClick: this.changeColor },
+                { className: this.props.selected ? "selected" : null, onClick: this.selectProduct },
                 _react2.default.createElement(
                     'td',
                     null,
@@ -30397,7 +30365,7 @@ var Product = function (_React$Component) {
                 _react2.default.createElement(
                     'td',
                     null,
-                    _react2.default.createElement('img', { src: this.props.url })
+                    _react2.default.createElement('img', { src: this.props.url, alt: this.props.name })
                 ),
                 _react2.default.createElement(
                     'td',
@@ -30407,12 +30375,13 @@ var Product = function (_React$Component) {
                 _react2.default.createElement(
                     'td',
                     null,
-                    this.props.balance
+                    this.props.quantity
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    _react2.default.createElement('input', { type: 'button', value: '\u0423\u0434\u0430\u043B\u0438\u0442\u044C', onClick: this.deleteProduct })
+                    _react2.default.createElement('input', { type: 'button', value: 'Edit', onClick: this.editProduct }),
+                    _react2.default.createElement('input', { type: 'button', value: 'Delete', onClick: this.deleteProduct })
                 )
             );
         }
@@ -30426,9 +30395,10 @@ Product.propTypes = {
     code: _propTypes2.default.number.isRequired,
     price: _propTypes2.default.number.isRequired,
     url: _propTypes2.default.string.isRequired,
-    balance: _propTypes2.default.number.isRequired,
-    cbSelectedLine: _propTypes2.default.func.isRequired,
+    quantity: _propTypes2.default.number.isRequired,
+    cbSelectedProduct: _propTypes2.default.func.isRequired,
     cbDeleteProduct: _propTypes2.default.func.isRequired,
+    cbEditProduct: _propTypes2.default.func.isRequired,
     selected: _propTypes2.default.bool.isRequired
 };
 ;
@@ -30437,214 +30407,12 @@ exports.default = Product;
 
 /***/ }),
 /* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-(function(f) {
-  if (true) {
-    module.exports = f(__webpack_require__(1));
-    /* global define */
-  } else if (typeof define === 'function' && define.amd) {
-    define(['react'], f);
-  } else {
-    var g;
-    if (typeof window !== 'undefined') {
-      g = window;
-    } else if (typeof global !== 'undefined') {
-      g = global;
-    } else if (typeof self !== 'undefined') {
-      g = self;
-    } else {
-      g = this;
-    }
-
-    if (typeof g.React === 'undefined') {
-      throw Error('React module should be required before ReactDOMFactories');
-    }
-
-    g.ReactDOMFactories = f(g.React);
-  }
-})(function(React) {
-  /**
-   * Create a factory that creates HTML tag elements.
-   */
-  function createDOMFactory(type) {
-    var factory = React.createElement.bind(null, type);
-    // Expose the type on the factory and the prototype so that it can be
-    // easily accessed on elements. E.g. `<Foo />.type === Foo`.
-    // This should not be named `constructor` since this may not be the function
-    // that created the element, and it may not even be a constructor.
-    factory.type = type;
-    return factory;
-  };
-
-  /**
-   * Creates a mapping from supported HTML tags to `ReactDOMComponent` classes.
-   */
-  var ReactDOMFactories = {
-    a: createDOMFactory('a'),
-    abbr: createDOMFactory('abbr'),
-    address: createDOMFactory('address'),
-    area: createDOMFactory('area'),
-    article: createDOMFactory('article'),
-    aside: createDOMFactory('aside'),
-    audio: createDOMFactory('audio'),
-    b: createDOMFactory('b'),
-    base: createDOMFactory('base'),
-    bdi: createDOMFactory('bdi'),
-    bdo: createDOMFactory('bdo'),
-    big: createDOMFactory('big'),
-    blockquote: createDOMFactory('blockquote'),
-    body: createDOMFactory('body'),
-    br: createDOMFactory('br'),
-    button: createDOMFactory('button'),
-    canvas: createDOMFactory('canvas'),
-    caption: createDOMFactory('caption'),
-    cite: createDOMFactory('cite'),
-    code: createDOMFactory('code'),
-    col: createDOMFactory('col'),
-    colgroup: createDOMFactory('colgroup'),
-    data: createDOMFactory('data'),
-    datalist: createDOMFactory('datalist'),
-    dd: createDOMFactory('dd'),
-    del: createDOMFactory('del'),
-    details: createDOMFactory('details'),
-    dfn: createDOMFactory('dfn'),
-    dialog: createDOMFactory('dialog'),
-    div: createDOMFactory('div'),
-    dl: createDOMFactory('dl'),
-    dt: createDOMFactory('dt'),
-    em: createDOMFactory('em'),
-    embed: createDOMFactory('embed'),
-    fieldset: createDOMFactory('fieldset'),
-    figcaption: createDOMFactory('figcaption'),
-    figure: createDOMFactory('figure'),
-    footer: createDOMFactory('footer'),
-    form: createDOMFactory('form'),
-    h1: createDOMFactory('h1'),
-    h2: createDOMFactory('h2'),
-    h3: createDOMFactory('h3'),
-    h4: createDOMFactory('h4'),
-    h5: createDOMFactory('h5'),
-    h6: createDOMFactory('h6'),
-    head: createDOMFactory('head'),
-    header: createDOMFactory('header'),
-    hgroup: createDOMFactory('hgroup'),
-    hr: createDOMFactory('hr'),
-    html: createDOMFactory('html'),
-    i: createDOMFactory('i'),
-    iframe: createDOMFactory('iframe'),
-    img: createDOMFactory('img'),
-    input: createDOMFactory('input'),
-    ins: createDOMFactory('ins'),
-    kbd: createDOMFactory('kbd'),
-    keygen: createDOMFactory('keygen'),
-    label: createDOMFactory('label'),
-    legend: createDOMFactory('legend'),
-    li: createDOMFactory('li'),
-    link: createDOMFactory('link'),
-    main: createDOMFactory('main'),
-    map: createDOMFactory('map'),
-    mark: createDOMFactory('mark'),
-    menu: createDOMFactory('menu'),
-    menuitem: createDOMFactory('menuitem'),
-    meta: createDOMFactory('meta'),
-    meter: createDOMFactory('meter'),
-    nav: createDOMFactory('nav'),
-    noscript: createDOMFactory('noscript'),
-    object: createDOMFactory('object'),
-    ol: createDOMFactory('ol'),
-    optgroup: createDOMFactory('optgroup'),
-    option: createDOMFactory('option'),
-    output: createDOMFactory('output'),
-    p: createDOMFactory('p'),
-    param: createDOMFactory('param'),
-    picture: createDOMFactory('picture'),
-    pre: createDOMFactory('pre'),
-    progress: createDOMFactory('progress'),
-    q: createDOMFactory('q'),
-    rp: createDOMFactory('rp'),
-    rt: createDOMFactory('rt'),
-    ruby: createDOMFactory('ruby'),
-    s: createDOMFactory('s'),
-    samp: createDOMFactory('samp'),
-    script: createDOMFactory('script'),
-    section: createDOMFactory('section'),
-    select: createDOMFactory('select'),
-    small: createDOMFactory('small'),
-    source: createDOMFactory('source'),
-    span: createDOMFactory('span'),
-    strong: createDOMFactory('strong'),
-    style: createDOMFactory('style'),
-    sub: createDOMFactory('sub'),
-    summary: createDOMFactory('summary'),
-    sup: createDOMFactory('sup'),
-    table: createDOMFactory('table'),
-    tbody: createDOMFactory('tbody'),
-    td: createDOMFactory('td'),
-    textarea: createDOMFactory('textarea'),
-    tfoot: createDOMFactory('tfoot'),
-    th: createDOMFactory('th'),
-    thead: createDOMFactory('thead'),
-    time: createDOMFactory('time'),
-    title: createDOMFactory('title'),
-    tr: createDOMFactory('tr'),
-    track: createDOMFactory('track'),
-    u: createDOMFactory('u'),
-    ul: createDOMFactory('ul'),
-    var: createDOMFactory('var'),
-    video: createDOMFactory('video'),
-    wbr: createDOMFactory('wbr'),
-
-    // SVG
-    circle: createDOMFactory('circle'),
-    clipPath: createDOMFactory('clipPath'),
-    defs: createDOMFactory('defs'),
-    ellipse: createDOMFactory('ellipse'),
-    g: createDOMFactory('g'),
-    image: createDOMFactory('image'),
-    line: createDOMFactory('line'),
-    linearGradient: createDOMFactory('linearGradient'),
-    mask: createDOMFactory('mask'),
-    path: createDOMFactory('path'),
-    pattern: createDOMFactory('pattern'),
-    polygon: createDOMFactory('polygon'),
-    polyline: createDOMFactory('polyline'),
-    radialGradient: createDOMFactory('radialGradient'),
-    rect: createDOMFactory('rect'),
-    stop: createDOMFactory('stop'),
-    svg: createDOMFactory('svg'),
-    text: createDOMFactory('text'),
-    tspan: createDOMFactory('tspan'),
-  };
-
-  // due to wrapper and conditionals at the top, this will either become
-  // `module.exports ReactDOMFactories` if that is available,
-  // otherwise it will be defined via `define(['react'], ReactDOMFactories)`
-  // if that is available,
-  // otherwise it will be defined as global variable.
-  return ReactDOMFactories;
-});
-
-
-
-/***/ }),
-/* 27 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30664,7 +30432,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-__webpack_require__(29);
+__webpack_require__(28);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30693,7 +30461,7 @@ var ProductDescription = function (_React$Component) {
                     'span',
                     null,
                     'ID: ',
-                    this.props.code.toString()
+                    this.props.code
                 ),
                 _react2.default.createElement(
                     'span',
@@ -30710,13 +30478,13 @@ var ProductDescription = function (_React$Component) {
                     'span',
                     null,
                     'Price: ',
-                    this.props.price.toString()
+                    this.props.price
                 ),
                 _react2.default.createElement(
                     'span',
                     null,
                     'Quantity: ',
-                    this.props.quantity.toString()
+                    this.props.quantity
                 )
             );
         }
@@ -30736,13 +30504,13 @@ ProductDescription.propTypes = {
 exports.default = ProductDescription;
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30762,7 +30530,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-__webpack_require__(31);
+__webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30775,45 +30543,69 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EditProduct = function (_React$Component) {
     _inherits(EditProduct, _React$Component);
 
-    function EditProduct() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function EditProduct(props) {
         _classCallCheck(this, EditProduct);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            name: _this.props.editedProduct.name,
-            code: _this.props.editedProduct.code,
-            URL: _this.props.editedProduct.url,
-            price: _this.props.editedProduct.price,
-            quantity: _this.props.editedProduct.quantity
-        }, _this.editName = function (EO) {
+        _this.state = {
+            /* name: this.props.editedProduct.name,
+            code: this.props.editedProduct.code,
+            URL: this.props.editedProduct.url,
+            price: this.props.editedProduct.price,
+            quantity: this.props.editedProduct.quantity, */
+        };
+
+        _this.editName = function (EO) {
             _this.setState({
                 name: EO.target.value
             });
-            console.log(_this.state.name);
-        }, _this.editURL = function (EO) {
+        };
+
+        _this.editURL = function (EO) {
             _this.setState({
                 URL: EO.target.value
             });
-        }, _this.editPrice = function (EO) {
+        };
+
+        _this.editPrice = function (EO) {
             _this.setState({
                 price: EO.target.value
             });
-        }, _this.editQuantity = function (EO) {
+        };
+
+        _this.editQuantity = function (EO) {
             _this.setState({
                 quantity: EO.target.value
             });
-        }, _this.saveChanges = function () {
+        };
+
+        _this.saveChanges = function () {
             _this.props.cbSaveChanges();
-        }, _this.cancelChanges = function () {
+        };
+
+        _this.cancelChanges = function () {
             _this.props.cbCancelChanges();
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        if (_this.props.workMode == 1) {
+            _this.state = {
+                name: _this.props.editedProduct.name,
+                code: _this.props.editedProduct.code,
+                URL: _this.props.editedProduct.url,
+                price: _this.props.editedProduct.price,
+                quantity: _this.props.editedProduct.quantity
+            };
+        } else if (_this.props.workMode == 2) {
+            _this.state = {
+                name: "",
+                code: 9,
+                URL: "",
+                price: "",
+                quantity: ""
+            };
+        }
+        return _this;
     }
 
     _createClass(EditProduct, [{
@@ -30826,7 +30618,7 @@ var EditProduct = function (_React$Component) {
                     'span',
                     null,
                     'ID: ',
-                    this.state.code
+                    this.props.workMode == 1 ? this.state.code : ""
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30902,26 +30694,22 @@ EditProduct.propTypes = {
         quantity: _propTypes2.default.number.isRequired
     }),
     workMode: _propTypes2.default.number.isRequired,
-    /* cbEditName: PropTypes.func.isRequired,
-    cbEditURL: PropTypes.func.isRequired,
-    cbEditPrice: PropTypes.func.isRequired,
-    cbEditQuantity: PropTypes.func.isRequired, */
     cbSaveChanges: _propTypes2.default.func.isRequired,
     cbCancelChanges: _propTypes2.default.func.isRequired
 };
 exports.default = EditProduct;
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports) {
 
-module.exports = [{"name":"Молоко","code":1,"price":10,"url":"https://cutt.ly/Sf9fhLB","balance":8},{"name":"Кефир","code":2,"price":11,"url":"https://cutt.ly/pf9fnR6","balance":9},{"name":"Колбаса","code":4,"price":24,"url":"https://cutt.ly/nf9fDpm","balance":15},{"name":"Мясо","code":5,"price":35,"url":"https://cutt.ly/of9fLJQ","balance":6},{"name":"Конфеты","code":7,"price":6,"url":"https://cutt.ly/Xf9gqVU","balance":14},{"name":"Печенье","code":8,"price":4,"url":"https://cutt.ly/Pf9gp5A","balance":53},{"name":"Огурцы","code":10,"price":2,"url":"https://cutt.ly/Mf9gjAu","balance":75},{"name":"Помидоры","code":11,"price":3,"url":"https://cutt.ly/jf9gzFe","balance":57}]
+module.exports = [{"name":"Молоко","code":1,"price":10,"url":"https://cutt.ly/Sf9fhLB","quantity":8},{"name":"Кефир","code":2,"price":11,"url":"https://cutt.ly/pf9fnR6","quantity":9},{"name":"Колбаса","code":4,"price":24,"url":"https://cutt.ly/nf9fDpm","quantity":15},{"name":"Мясо","code":5,"price":35,"url":"https://cutt.ly/of9fLJQ","quantity":6},{"name":"Конфеты","code":7,"price":6,"url":"https://cutt.ly/Xf9gqVU","quantity":14},{"name":"Печенье","code":8,"price":4,"url":"https://cutt.ly/Pf9gp5A","quantity":53},{"name":"Огурцы","code":10,"price":2,"url":"https://cutt.ly/Mf9gjAu","quantity":75},{"name":"Помидоры","code":11,"price":3,"url":"https://cutt.ly/jf9gzFe","quantity":57}]
 
 /***/ })
 /******/ ]);

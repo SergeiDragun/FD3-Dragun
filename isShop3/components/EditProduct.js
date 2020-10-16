@@ -8,21 +8,16 @@ class EditProduct extends React.Component {
     static propTypes = {
         editedProduct: PropTypes.shape({
             name: PropTypes.string.isRequired,
-            code: PropTypes.number.isRequired,
-            price: PropTypes.number.isRequired,
+            code: PropTypes.string,
+            price: PropTypes.string.isRequired,
             url: PropTypes.string.isRequired,
-            quantity: PropTypes.number.isRequired,
+            quantity: PropTypes.string.isRequired,
         }),
         workMode: PropTypes.number.isRequired,
-        /* cbEditName: PropTypes.func.isRequired,
-        cbEditURL: PropTypes.func.isRequired,
-        cbEditPrice: PropTypes.func.isRequired,
-        cbEditQuantity: PropTypes.func.isRequired, */
         cbSaveChanges: PropTypes.func.isRequired,
         cbCancelChanges: PropTypes.func.isRequired,
+        nextID: PropTypes.number
     };
-
-    
 
     state = {
         name: this.props.editedProduct.name,
@@ -30,14 +25,13 @@ class EditProduct extends React.Component {
         URL: this.props.editedProduct.url,
         price: this.props.editedProduct.price,
         quantity: this.props.editedProduct.quantity,
+        nextID: this.props.nextID
     };
 
     editName = (EO) => {
         this.setState({
             name: EO.target.value,
         })
-        console.log(this.state.name)
-
     }
 
     editURL = (EO) => {
@@ -59,7 +53,7 @@ class EditProduct extends React.Component {
     }
 
     saveChanges = () => {
-        this.props.cbSaveChanges()
+        this.props.cbSaveChanges(this.state)
     }
 
     cancelChanges = () => {
@@ -68,8 +62,8 @@ class EditProduct extends React.Component {
 
     render() {
         return (
-            <div className="editProduct">
-                <span>ID: {this.state.code}</span>
+            <div className="editProduct" key={this.state.key}>
+                <span>ID: {(this.props.workMode == 1)?this.state.code:this.state.nextID}</span>
                 <div className="product">
                     <span>Name:</span>
                     <input 

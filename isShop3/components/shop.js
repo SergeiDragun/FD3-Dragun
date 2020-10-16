@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number } from 'prop-types';
 
 import './shop.css';
 
@@ -14,10 +14,10 @@ class IsShop3 extends React.Component {
         productList: PropTypes.arrayOf(
             PropTypes.shape({
                 name: PropTypes.string.isRequired,
-                code: PropTypes.number.isRequired,
-                price: PropTypes.number.isRequired,
+                code: PropTypes.string.isRequired,
+                price: PropTypes.string.isRequired,
                 url: PropTypes.string.isRequired,
-                quantity: PropTypes.number.isRequired,
+                quantity: PropTypes.string.isRequired,
             })
         ),
     };
@@ -30,11 +30,18 @@ class IsShop3 extends React.Component {
         workModeEdit: 0, // 0 - не показывать, 1 - редактировать, 2 - добавить новый
         currentProduct: null, 
         editedProduct: null,
+        newProduct: {
+            name: "",
+            price: "",
+            url: "",
+            quantity: "",
+        },
+        nextID: this.props.nextID, // изначально 8 товаров
     };
 
     selectedProduct = (code) => {
         let currentProduct = this.state.productList.slice();
-        currentProduct = currentProduct.filter(item => item.code==code)[0];
+        currentProduct = currentProduct.find(item => item.code==code);
         this.setState({
             currentProduct: currentProduct, 
             workModeDescription: 1, 
@@ -45,8 +52,7 @@ class IsShop3 extends React.Component {
 
     editProduct = (code) => {
         let editedProduct = this.state.productList.slice();
-        editedProduct = editedProduct.filter(item => item.code==code)[0];
-        console
+        editedProduct = editedProduct.find(item => item.code==code);
         this.setState({
             workModeDescription: 0, 
             workModeEdit: 1,
@@ -66,7 +72,6 @@ class IsShop3 extends React.Component {
                 }
                 return item.code!=code;
             });
-            console.log(delProductCode)
             if (this.state.currentProduct && (delProductCode == this.state.currentProduct.code)) {
                 this.setState({productList: delProduct, workModeDescription: 0});
             } else if (this.state.editedProduct && (delProductCode == this.state.editedProduct.code)) {
@@ -77,40 +82,8 @@ class IsShop3 extends React.Component {
         }
     };
     
-    /* editName = (newName) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.name = newName;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-
-    editURL = (newURL) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.url = newURL;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-
-    editPrice = (newPrice) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.price = newPrice;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    }
-
-    editQuantity = (newQuantity) => {
-        let editedProduct = this.state.editedProduct;
-        editedProduct.quantity = newQuantity;
-        this.setState({
-            editedProduct: editedProduct,
-        })
-    } */
-
-    saveChanges = () => {
-        console.log("соxраняю")
+    saveChanges = (qwe) => {
+        console.log(qwe)
     }
 
     cancelChanges = () => {
@@ -119,6 +92,11 @@ class IsShop3 extends React.Component {
 
     newProduct = (EO) => {
         console.log("Создаю новый")
+        this.setState({
+            workModeEdit: 2,
+            workModeDescription: 0,
+            highlitedLine: 0,
+        })
     }
 
     render() {
@@ -163,17 +141,25 @@ class IsShop3 extends React.Component {
                         quantity={this.state.currentProduct.quantity}
                     />
                 }
-                {
-                    (this.state.workModeEdit == 1) &&
+                {console.log(this.state.workModeEdit)}
+                {   
+                    (this.state.workModeEdit == 1) && 
                     <EditProduct
+                        key={this.state.editedProduct.code}
                         workMode={this.state.workModeEdit}
                         editedProduct={this.state.editedProduct}
-                        /* cbEditName={this.editName}
-                        cbEditURL={this.editURL}
-                        cbEditPrice={this.editPrice}
-                        cbEditQuantity={this.editQuantity} */
                         cbSaveChanges={this.saveChanges}
                         cbCancelChanges={this.cancelChanges}
+                    /> 
+                    ||
+                    (this.state.workModeEdit == 2) &&
+                    <EditProduct
+                        key={this.state.nextID}
+                        workMode={this.state.workModeEdit}
+                        editedProduct={this.state.newProduct}
+                        cbSaveChanges={this.saveChanges}
+                        cbCancelChanges={this.cancelChanges}
+                        nextID={this.state.nextID}
                     />
                 }
             </Fragment>

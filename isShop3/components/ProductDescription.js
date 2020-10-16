@@ -6,11 +6,11 @@ import './ProductDescription.css';
 class ProductDescription extends React.Component {
 
     static propTypes = {
-        code: PropTypes.number.isRequired,
+        code: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        quantity: PropTypes.number.isRequired,
+        price: PropTypes.string.isRequired,
+        quantity: PropTypes.string.isRequired,
         workmode: PropTypes.number.isRequired,
     };
 

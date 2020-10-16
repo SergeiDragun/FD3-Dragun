@@ -7,10 +7,10 @@ class Product extends React.Component {
 
     static propTypes = {
         name: PropTypes.string.isRequired,
-        code: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
+        code: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
-        quantity: PropTypes.number.isRequired,
+        quantity: PropTypes.string.isRequired,
         cbSelectedProduct: PropTypes.func.isRequired,
         cbDeleteProduct: PropTypes.func.isRequired,
         cbEditProduct: PropTypes.func.isRequired,
