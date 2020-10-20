@@ -573,7 +573,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var shopName = "Продуктовый магазин";
 var productListArr = __webpack_require__(31);
-var nextID = "9";
+var nextID = 9;
 
 _reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
     shop: shopName,
@@ -29253,29 +29253,40 @@ var IsShop3 = function (_React$Component) {
                 quantity: "",
                 code: ""
             },
-            nextID: _this.props.nextID // изначально 8 товаров
+            nextID: _this.props.nextID, // изначально 8 товаров
+            nameIsValid: null,
+            priceIsValid: null,
+            urlIsValid: null,
+            quantityIsValid: null,
+            valuesAreInValid: false,
+            btnsDisabled: false
         }, _this.selectedProduct = function (code) {
-            var currentProduct = _this.state.productList.slice();
-            currentProduct = currentProduct.find(function (item) {
-                return item.code == code;
-            });
-            _this.setState({
-                currentProduct: currentProduct,
-                workModeDescription: 1,
-                highlitedLine: code,
-                workModeEdit: 0
-            });
+            if (!_this.state.btnsDisabled) {
+                var currentProduct = _this.state.productList.slice();
+                currentProduct = currentProduct.find(function (item) {
+                    return item.code == code;
+                });
+                _this.setState({
+                    currentProduct: currentProduct,
+                    workModeDescription: 1,
+                    highlitedLine: code,
+                    workModeEdit: 0
+                });
+            }
         }, _this.editProduct = function (code) {
             var editedProduct = _this.state.productList.slice();
             editedProduct = editedProduct.find(function (item) {
                 return item.code == code;
             });
-            console.log(editedProduct);
             _this.setState({
                 workModeDescription: 0,
                 workModeEdit: 1,
                 editedProduct: editedProduct,
-                highlitedLine: code
+                highlitedLine: code,
+                nameIsValid: true,
+                priceIsValid: true,
+                urlIsValid: true,
+                quantityIsValid: true
             });
         }, _this.deleteProduct = function (code) {
             var consent = confirm("Вы хотите удалить товар?");
@@ -29303,10 +29314,11 @@ var IsShop3 = function (_React$Component) {
                 for (var i = 0; i < editedProduct.length; i++) {
                     // Не использовал forEach, т.к. нельзя прервать цикл
                     if (editedProduct[i].code == newProduct.code) {
-                        editedProduct.splice(editedProduct.indexOf(editedProduct[i].code), 1, newProduct);
+                        editedProduct[i] = newProduct;
                         _this.setState({
                             productList: editedProduct,
-                            workModeEdit: 0
+                            workModeEdit: 0,
+                            btnsDisabled: false
                         });
                         break;
                     }
@@ -29321,20 +29333,28 @@ var IsShop3 = function (_React$Component) {
                 _this.setState({
                     productList: newProductList,
                     nextID: nextID,
-                    workModeEdit: 0
+                    workModeEdit: 0,
+                    btnsDisabled: false
                 });
             }
         }, _this.cancelChanges = function () {
             _this.setState({
-                workModeEdit: 0
+                workModeEdit: 0,
+                btnsDisabled: false
             });
-            console.log("отменяю");
+        }, _this.disableBtns = function () {
+            _this.setState({
+                btnsDisabled: true
+            });
         }, _this.newProduct = function () {
-            console.log("Создаю новый");
             _this.setState({
                 workModeEdit: 2,
                 workModeDescription: 0,
-                highlitedLine: 0
+                highlitedLine: 0,
+                nameIsValid: false,
+                priceIsValid: false,
+                urlIsValid: false,
+                quantityIsValid: false
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -29355,7 +29375,8 @@ var IsShop3 = function (_React$Component) {
                     cbSelectedProduct: _this2.selectedProduct,
                     cbDeleteProduct: _this2.deleteProduct,
                     cbEditProduct: _this2.editProduct,
-                    selected: _this2.state.highlitedLine == item.code ? true : false
+                    selected: _this2.state.highlitedLine == item.code ? true : false,
+                    btnsDisabled: _this2.state.btnsDisabled
                 });
             });
             return _react2.default.createElement(
@@ -29408,7 +29429,7 @@ var IsShop3 = function (_React$Component) {
                         products
                     )
                 ),
-                _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct }),
+                _react2.default.createElement('input', { type: 'button', value: 'New product', disabled: this.state.btnsDisabled, onClick: this.newProduct }),
                 this.state.workModeDescription == 1 && _react2.default.createElement(_ProductDescription2.default, {
                     workmode: this.state.workModeDescription,
                     name: this.state.currentProduct.name,
@@ -29422,14 +29443,28 @@ var IsShop3 = function (_React$Component) {
                     workMode: this.state.workModeEdit,
                     editedProduct: this.state.editedProduct,
                     cbSaveChanges: this.saveChanges,
-                    cbCancelChanges: this.cancelChanges
+                    cbCancelChanges: this.cancelChanges,
+                    cbDisableBtns: this.disableBtns,
+                    nameIsValid: this.state.nameIsValid,
+                    priceIsValid: this.state.priceIsValid,
+                    urlIsValid: this.state.urlIsValid,
+                    quantityIsValid: this.state.quantityIsValid,
+                    valuesAreInValid: this.state.valuesAreInValid,
+                    btnsDisabled: this.state.btnsDisabled
                 }) || this.state.workModeEdit == 2 && _react2.default.createElement(_EditProduct2.default, {
                     key: this.state.nextID,
                     workMode: this.state.workModeEdit,
                     editedProduct: this.state.newProduct,
                     cbSaveChanges: this.saveChanges,
                     cbCancelChanges: this.cancelChanges,
-                    nextID: this.state.nextID
+                    cbDisableBtns: this.disableBtns,
+                    nextID: this.state.nextID,
+                    nameIsValid: this.state.nameIsValid,
+                    priceIsValid: this.state.priceIsValid,
+                    urlIsValid: this.state.urlIsValid,
+                    quantityIsValid: this.state.quantityIsValid,
+                    valuesAreInValid: !this.state.valuesAreInValid,
+                    btnsDisabled: this.state.btnsDisabled
                 })
             );
         }
@@ -30430,8 +30465,8 @@ var Product = function (_React$Component) {
                 _react2.default.createElement(
                     'td',
                     null,
-                    _react2.default.createElement('input', { type: 'button', value: 'Edit', onClick: this.editProduct }),
-                    _react2.default.createElement('input', { type: 'button', value: 'Delete', onClick: this.deleteProduct })
+                    _react2.default.createElement('input', { type: 'button', value: 'Edit', disabled: this.props.btnsDisabled, onClick: this.editProduct }),
+                    _react2.default.createElement('input', { type: 'button', value: 'Delete', disabled: this.props.btnsDisabled, onClick: this.deleteProduct })
                 )
             );
         }
@@ -30449,7 +30484,8 @@ Product.propTypes = {
     cbSelectedProduct: _propTypes2.default.func.isRequired,
     cbDeleteProduct: _propTypes2.default.func.isRequired,
     cbEditProduct: _propTypes2.default.func.isRequired,
-    selected: _propTypes2.default.bool.isRequired
+    selected: _propTypes2.default.bool.isRequired,
+    btnsDisabled: _propTypes2.default.bool.isRequired
 };
 ;
 
@@ -30570,6 +30606,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -30593,45 +30631,98 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EditProduct = function (_React$Component) {
     _inherits(EditProduct, _React$Component);
 
-    function EditProduct() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function EditProduct(props) {
         _classCallCheck(this, EditProduct);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            name: _this.props.editedProduct.name,
-            code: _this.props.workMode == 1 ? _this.props.editedProduct.code : _this.props.nextID.toString(),
-            url: _this.props.editedProduct.url,
-            price: _this.props.editedProduct.price,
-            quantity: _this.props.editedProduct.quantity,
-            valid: false
-        }, _this.editName = function (EO) {
-            _this.setState({
-                name: EO.target.value
+        _this.state = {
+            options: {
+                name: _this.props.editedProduct.name,
+                code: _this.props.workMode == 1 ? _this.props.editedProduct.code : _this.props.nextID.toString(),
+                url: _this.props.editedProduct.url,
+                price: _this.props.editedProduct.price,
+                quantity: _this.props.editedProduct.quantity
+            },
+            nameIsValid: _this.props.nameIsValid,
+            priceIsValid: _this.props.priceIsValid,
+            urlIsValid: _this.props.urlIsValid,
+            quantityIsValid: _this.props.quantityIsValid,
+            valuesAreInValid: _this.props.valuesAreInValid
+        };
+
+        _this.editName = function (EO) {
+            _this.props.cbDisableBtns();
+            var value = EO.target.value;
+
+            var options = _extends({}, _this.state.options, { name: value });
+            _this.setState({ options: options }, function () {
+                _this.fieldsValidation(_this.state.options);
             });
-        }, _this.editURL = function (EO) {
-            _this.setState({
-                url: EO.target.value
+        };
+
+        _this.editURL = function (EO) {
+            _this.props.cbDisableBtns();
+            var value = EO.target.value;
+
+            var options = _extends({}, _this.state.options, { url: value });
+            _this.setState({ options: options }, function () {
+                _this.fieldsValidation(_this.state.options);
             });
-        }, _this.editPrice = function (EO) {
-            _this.setState({
-                price: EO.target.value
+        };
+
+        _this.editPrice = function (EO) {
+            _this.props.cbDisableBtns();
+            var value = EO.target.value;
+
+            var options = _extends({}, _this.state.options, { price: value });
+            _this.setState({ options: options }, function () {
+                _this.fieldsValidation(_this.state.options);
             });
-        }, _this.editQuantity = function (EO) {
-            _this.setState({
-                quantity: EO.target.value
+        };
+
+        _this.editQuantity = function (EO) {
+            _this.props.cbDisableBtns();
+            var value = EO.target.value;
+
+            var options = _extends({}, _this.state.options, { quantity: value });
+            _this.setState({ options: options }, function () {
+                _this.fieldsValidation(_this.state.options);
             });
-        }, _this.saveChanges = function () {
-            _this.props.cbSaveChanges(_this.state);
-        }, _this.cancelChanges = function () {
+        };
+
+        _this.fieldsValidation = function (options) {
+            !options.name ? _this.setState({ nameIsValid: false }, _this.checkValidity) : _this.setState({ nameIsValid: true }, _this.checkValidity);
+
+            !options.url ? _this.setState({ urlIsValid: false }, _this.checkValidity) : _this.setState({ urlIsValid: true }, _this.checkValidity);
+
+            !options.price ? _this.setState({ priceIsValid: false }, _this.checkValidity) : _this.setState({ priceIsValid: true }, _this.checkValidity);
+
+            !options.quantity ? _this.setState({ quantityIsValid: false }, _this.checkValidity) : _this.setState({ quantityIsValid: true }, _this.checkValidity);
+        };
+
+        _this.checkValidity = function () {
+            if (!_this.state.nameIsValid || !_this.state.urlIsValid || !_this.state.priceIsValid || !_this.state.quantityIsValid) {
+                _this.setState({
+                    valuesAreInValid: true
+                });
+            } else if (_this.state.nameIsValid && _this.state.urlIsValid && _this.state.priceIsValid && _this.state.quantityIsValid) {
+                _this.setState({
+                    valuesAreInValid: false
+                });
+            }
+        };
+
+        _this.saveChanges = function () {
+            _this.props.cbSaveChanges(_this.state.options);
+        };
+
+        _this.cancelChanges = function () {
             _this.props.cbCancelChanges();
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        console.log(_this.state.valuesAreInValid);
+        return _this;
     }
 
     _createClass(EditProduct, [{
@@ -30639,7 +30730,7 @@ var EditProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'editProduct', key: this.state.key },
+                { className: 'editProduct', key: this.state.options.code },
                 this.props.workMode == 1 ? _react2.default.createElement(
                     'span',
                     { className: 'editTitle' },
@@ -30653,7 +30744,7 @@ var EditProduct = function (_React$Component) {
                     'span',
                     null,
                     'ID: ',
-                    this.state.code
+                    this.state.options.code
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30665,10 +30756,10 @@ var EditProduct = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        value: this.state.name,
+                        value: this.state.options.name,
                         onChange: this.editName
                     }),
-                    !this.state.valid && _react2.default.createElement(
+                    !this.state.nameIsValid && _react2.default.createElement(
                         'span',
                         { className: 'errorField' },
                         'Field invalid'
@@ -30684,13 +30775,13 @@ var EditProduct = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        value: this.state.url,
+                        value: this.state.options.url,
                         onChange: this.editURL
                     }),
-                    !this.state.valid && _react2.default.createElement(
+                    !this.state.urlIsValid && _react2.default.createElement(
                         'span',
                         { className: 'errorField' },
-                        'Field invalid asd'
+                        'Field invalid'
                     )
                 ),
                 _react2.default.createElement(
@@ -30703,10 +30794,10 @@ var EditProduct = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        value: this.state.price,
+                        value: this.state.options.price,
                         onChange: this.editPrice
                     }),
-                    !this.state.valid && _react2.default.createElement(
+                    !this.state.priceIsValid && _react2.default.createElement(
                         'span',
                         { className: 'errorField' },
                         'Field invalid'
@@ -30722,16 +30813,16 @@ var EditProduct = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        value: this.state.quantity,
+                        value: this.state.options.quantity,
                         onChange: this.editQuantity
                     }),
-                    !this.state.valid && _react2.default.createElement(
+                    !this.state.quantityIsValid && _react2.default.createElement(
                         'span',
                         { className: 'errorField' },
                         'Field invalid'
                     )
                 ),
-                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.saveChanges }),
+                _react2.default.createElement('input', { type: 'button', value: 'Save', disabled: this.state.valuesAreInValid, onClick: this.saveChanges }),
                 _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancelChanges })
             );
         }
@@ -30751,7 +30842,14 @@ EditProduct.propTypes = {
     workMode: _propTypes2.default.number.isRequired,
     cbSaveChanges: _propTypes2.default.func.isRequired,
     cbCancelChanges: _propTypes2.default.func.isRequired,
-    nextID: _propTypes2.default.string
+    cbDisableBtns: _propTypes2.default.func.isRequired,
+    nextID: _propTypes2.default.number,
+    nameIsValid: _propTypes2.default.bool.isRequired,
+    priceIsValid: _propTypes2.default.bool.isRequired,
+    urlIsValid: _propTypes2.default.bool.isRequired,
+    quantityIsValid: _propTypes2.default.bool.isRequired,
+    valuesAreInValid: _propTypes2.default.bool.isRequired,
+    btnsDisabled: _propTypes2.default.bool.isRequired
 };
 exports.default = EditProduct;
 

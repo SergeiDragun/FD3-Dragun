@@ -54,11 +54,11 @@
     margin-top: 5px;
 }
 
-.editProduct > input[type=button] {
+input[type=button] {
     cursor: pointer;
 }
 
-.product > span{
+.product > span {
     display: inline-block;
     width: 70px;
     background-color: #fff;
