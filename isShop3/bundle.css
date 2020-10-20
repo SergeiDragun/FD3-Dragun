@@ -63,4 +63,15 @@
     width: 70px;
     background-color: #fff;
 }
+
+.errorField {
+    color: red;
+    white-space: nowrap;
+}
+
+.editTitle {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
 /*# sourceMappingURL=bundle.css.map*/

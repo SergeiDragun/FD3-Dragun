@@ -573,10 +573,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var shopName = "Продуктовый магазин";
 var productListArr = __webpack_require__(31);
+var nextID = "9";
 
 _reactDom2.default.render(_react2.default.createElement(_Shop2.default, {
     shop: shopName,
-    productList: productListArr
+    productList: productListArr,
+    nextID: nextID
 }), document.getElementById("container"));
 
 /***/ }),
@@ -29243,7 +29245,15 @@ var IsShop3 = function (_React$Component) {
             workModeDescription: 0, // 0 - не показывать описание продукта, 1 - показывать
             workModeEdit: 0, // 0 - не показывать, 1 - редактировать, 2 - добавить новый
             currentProduct: null,
-            editedProduct: null
+            editedProduct: null,
+            newProduct: {
+                name: "",
+                price: "",
+                url: "",
+                quantity: "",
+                code: ""
+            },
+            nextID: _this.props.nextID // изначально 8 товаров
         }, _this.selectedProduct = function (code) {
             var currentProduct = _this.state.productList.slice();
             currentProduct = currentProduct.find(function (item) {
@@ -29260,7 +29270,7 @@ var IsShop3 = function (_React$Component) {
             editedProduct = editedProduct.find(function (item) {
                 return item.code == code;
             });
-            console;
+            console.log(editedProduct);
             _this.setState({
                 workModeDescription: 0,
                 workModeEdit: 1,
@@ -29272,7 +29282,7 @@ var IsShop3 = function (_React$Component) {
             if (consent) {
                 var delProductCode = void 0;
                 var delProduct = _this.state.productList.slice();
-                delProduct = delProduct.find(function (item) {
+                delProduct = delProduct.filter(function (item) {
                     if (item.code != code) {
                         delProductCode = code;
                     }
@@ -29286,14 +29296,45 @@ var IsShop3 = function (_React$Component) {
                     _this.setState({ productList: delProduct });
                 }
             }
-        }, _this.saveChanges = function () {
-            console.log("соxраняю");
+        }, _this.saveChanges = function (newProduct) {
+            if (_this.state.workModeEdit == 1) {
+                // Сохранение отредактированного продукта
+                var editedProduct = _this.state.productList.slice();
+                for (var i = 0; i < editedProduct.length; i++) {
+                    // Не использовал forEach, т.к. нельзя прервать цикл
+                    if (editedProduct[i].code == newProduct.code) {
+                        editedProduct.splice(editedProduct.indexOf(editedProduct[i].code), 1, newProduct);
+                        _this.setState({
+                            productList: editedProduct,
+                            workModeEdit: 0
+                        });
+                        break;
+                    }
+                }
+            } else if (_this.state.workModeEdit == 2) {
+                // Сохранение нового продукта
+                var newProductList = _this.state.productList.slice();
+                newProductList.push(newProduct);
+                console.log(newProduct);
+                var nextID = _this.state.nextID;
+                nextID++;
+                _this.setState({
+                    productList: newProductList,
+                    nextID: nextID,
+                    workModeEdit: 0
+                });
+            }
         }, _this.cancelChanges = function () {
+            _this.setState({
+                workModeEdit: 0
+            });
             console.log("отменяю");
-        }, _this.newProduct = function (EO) {
+        }, _this.newProduct = function () {
             console.log("Создаю новый");
             _this.setState({
-                workModeEdit: 2
+                workModeEdit: 2,
+                workModeDescription: 0,
+                highlitedLine: 0
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -29306,7 +29347,7 @@ var IsShop3 = function (_React$Component) {
             var products = this.state.productList.map(function (item) {
                 return _react2.default.createElement(_Product2.default, {
                     key: item.code,
-                    code: item.code,
+                    code: item.code.toString(),
                     name: item.name,
                     price: item.price,
                     url: item.url,
@@ -29376,11 +29417,19 @@ var IsShop3 = function (_React$Component) {
                     url: this.state.currentProduct.url,
                     quantity: this.state.currentProduct.quantity
                 }),
-                (this.state.workModeEdit == 1 || this.state.workModeEdit == 2) && _react2.default.createElement(_EditProduct2.default, {
+                this.state.workModeEdit == 1 && _react2.default.createElement(_EditProduct2.default, {
+                    key: this.state.editedProduct.code,
                     workMode: this.state.workModeEdit,
                     editedProduct: this.state.editedProduct,
                     cbSaveChanges: this.saveChanges,
                     cbCancelChanges: this.cancelChanges
+                }) || this.state.workModeEdit == 2 && _react2.default.createElement(_EditProduct2.default, {
+                    key: this.state.nextID,
+                    workMode: this.state.workModeEdit,
+                    editedProduct: this.state.newProduct,
+                    cbSaveChanges: this.saveChanges,
+                    cbCancelChanges: this.cancelChanges,
+                    nextID: this.state.nextID
                 })
             );
         }
@@ -29393,11 +29442,12 @@ IsShop3.propTypes = {
     shop: _propTypes2.default.string.isRequired,
     productList: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         name: _propTypes2.default.string.isRequired,
-        code: _propTypes2.default.number.isRequired,
-        price: _propTypes2.default.number.isRequired,
+        code: _propTypes2.default.string.isRequired,
+        price: _propTypes2.default.string.isRequired,
         url: _propTypes2.default.string.isRequired,
-        quantity: _propTypes2.default.number.isRequired
-    }))
+        quantity: _propTypes2.default.string.isRequired
+    })),
+    nextID: _propTypes2.default.number.isRequired
 };
 ;
 
@@ -30392,10 +30442,10 @@ var Product = function (_React$Component) {
 
 Product.propTypes = {
     name: _propTypes2.default.string.isRequired,
-    code: _propTypes2.default.number.isRequired,
-    price: _propTypes2.default.number.isRequired,
+    code: _propTypes2.default.string.isRequired,
+    price: _propTypes2.default.string.isRequired,
     url: _propTypes2.default.string.isRequired,
-    quantity: _propTypes2.default.number.isRequired,
+    quantity: _propTypes2.default.string.isRequired,
     cbSelectedProduct: _propTypes2.default.func.isRequired,
     cbDeleteProduct: _propTypes2.default.func.isRequired,
     cbEditProduct: _propTypes2.default.func.isRequired,
@@ -30494,11 +30544,11 @@ var ProductDescription = function (_React$Component) {
 }(_react2.default.Component);
 
 ProductDescription.propTypes = {
-    code: _propTypes2.default.number.isRequired,
+    code: _propTypes2.default.string.isRequired,
     name: _propTypes2.default.string.isRequired,
     url: _propTypes2.default.string.isRequired,
-    price: _propTypes2.default.number.isRequired,
-    quantity: _propTypes2.default.number.isRequired,
+    price: _propTypes2.default.string.isRequired,
+    quantity: _propTypes2.default.string.isRequired,
     workmode: _propTypes2.default.number.isRequired
 };
 exports.default = ProductDescription;
@@ -30543,69 +30593,45 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EditProduct = function (_React$Component) {
     _inherits(EditProduct, _React$Component);
 
-    function EditProduct(props) {
+    function EditProduct() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, EditProduct);
 
-        var _this = _possibleConstructorReturn(this, (EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.state = {
-            /* name: this.props.editedProduct.name,
-            code: this.props.editedProduct.code,
-            URL: this.props.editedProduct.url,
-            price: this.props.editedProduct.price,
-            quantity: this.props.editedProduct.quantity, */
-        };
-
-        _this.editName = function (EO) {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            name: _this.props.editedProduct.name,
+            code: _this.props.workMode == 1 ? _this.props.editedProduct.code : _this.props.nextID.toString(),
+            url: _this.props.editedProduct.url,
+            price: _this.props.editedProduct.price,
+            quantity: _this.props.editedProduct.quantity,
+            valid: false
+        }, _this.editName = function (EO) {
             _this.setState({
                 name: EO.target.value
             });
-        };
-
-        _this.editURL = function (EO) {
+        }, _this.editURL = function (EO) {
             _this.setState({
-                URL: EO.target.value
+                url: EO.target.value
             });
-        };
-
-        _this.editPrice = function (EO) {
+        }, _this.editPrice = function (EO) {
             _this.setState({
                 price: EO.target.value
             });
-        };
-
-        _this.editQuantity = function (EO) {
+        }, _this.editQuantity = function (EO) {
             _this.setState({
                 quantity: EO.target.value
             });
-        };
-
-        _this.saveChanges = function () {
-            _this.props.cbSaveChanges();
-        };
-
-        _this.cancelChanges = function () {
+        }, _this.saveChanges = function () {
+            _this.props.cbSaveChanges(_this.state);
+        }, _this.cancelChanges = function () {
             _this.props.cbCancelChanges();
-        };
-
-        if (_this.props.workMode == 1) {
-            _this.state = {
-                name: _this.props.editedProduct.name,
-                code: _this.props.editedProduct.code,
-                URL: _this.props.editedProduct.url,
-                price: _this.props.editedProduct.price,
-                quantity: _this.props.editedProduct.quantity
-            };
-        } else if (_this.props.workMode == 2) {
-            _this.state = {
-                name: "",
-                code: 9,
-                URL: "",
-                price: "",
-                quantity: ""
-            };
-        }
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(EditProduct, [{
@@ -30613,12 +30639,21 @@ var EditProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'editProduct' },
+                { className: 'editProduct', key: this.state.key },
+                this.props.workMode == 1 ? _react2.default.createElement(
+                    'span',
+                    { className: 'editTitle' },
+                    'Edit existing product'
+                ) : _react2.default.createElement(
+                    'span',
+                    { className: 'editTitle' },
+                    'Add new product'
+                ),
                 _react2.default.createElement(
                     'span',
                     null,
                     'ID: ',
-                    this.props.workMode == 1 ? this.state.code : ""
+                    this.state.code
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30632,7 +30667,12 @@ var EditProduct = function (_React$Component) {
                         type: 'text',
                         value: this.state.name,
                         onChange: this.editName
-                    })
+                    }),
+                    !this.state.valid && _react2.default.createElement(
+                        'span',
+                        { className: 'errorField' },
+                        'Field invalid'
+                    )
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30644,9 +30684,14 @@ var EditProduct = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        value: this.state.URL,
+                        value: this.state.url,
                         onChange: this.editURL
-                    })
+                    }),
+                    !this.state.valid && _react2.default.createElement(
+                        'span',
+                        { className: 'errorField' },
+                        'Field invalid asd'
+                    )
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30660,7 +30705,12 @@ var EditProduct = function (_React$Component) {
                         type: 'text',
                         value: this.state.price,
                         onChange: this.editPrice
-                    })
+                    }),
+                    !this.state.valid && _react2.default.createElement(
+                        'span',
+                        { className: 'errorField' },
+                        'Field invalid'
+                    )
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30674,7 +30724,12 @@ var EditProduct = function (_React$Component) {
                         type: 'text',
                         value: this.state.quantity,
                         onChange: this.editQuantity
-                    })
+                    }),
+                    !this.state.valid && _react2.default.createElement(
+                        'span',
+                        { className: 'errorField' },
+                        'Field invalid'
+                    )
                 ),
                 _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.saveChanges }),
                 _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancelChanges })
@@ -30688,14 +30743,15 @@ var EditProduct = function (_React$Component) {
 EditProduct.propTypes = {
     editedProduct: _propTypes2.default.shape({
         name: _propTypes2.default.string.isRequired,
-        code: _propTypes2.default.number.isRequired,
-        price: _propTypes2.default.number.isRequired,
+        code: _propTypes2.default.string,
+        price: _propTypes2.default.string.isRequired,
         url: _propTypes2.default.string.isRequired,
-        quantity: _propTypes2.default.number.isRequired
+        quantity: _propTypes2.default.string.isRequired
     }),
     workMode: _propTypes2.default.number.isRequired,
     cbSaveChanges: _propTypes2.default.func.isRequired,
-    cbCancelChanges: _propTypes2.default.func.isRequired
+    cbCancelChanges: _propTypes2.default.func.isRequired,
+    nextID: _propTypes2.default.string
 };
 exports.default = EditProduct;
 
@@ -30709,7 +30765,7 @@ exports.default = EditProduct;
 /* 31 */
 /***/ (function(module, exports) {
 
-module.exports = [{"name":"Молоко","code":1,"price":10,"url":"https://cutt.ly/Sf9fhLB","quantity":8},{"name":"Кефир","code":2,"price":11,"url":"https://cutt.ly/pf9fnR6","quantity":9},{"name":"Колбаса","code":4,"price":24,"url":"https://cutt.ly/nf9fDpm","quantity":15},{"name":"Мясо","code":5,"price":35,"url":"https://cutt.ly/of9fLJQ","quantity":6},{"name":"Конфеты","code":7,"price":6,"url":"https://cutt.ly/Xf9gqVU","quantity":14},{"name":"Печенье","code":8,"price":4,"url":"https://cutt.ly/Pf9gp5A","quantity":53},{"name":"Огурцы","code":10,"price":2,"url":"https://cutt.ly/Mf9gjAu","quantity":75},{"name":"Помидоры","code":11,"price":3,"url":"https://cutt.ly/jf9gzFe","quantity":57}]
+module.exports = [{"name":"Молоко","code":"1","price":"10","url":"https://cutt.ly/Sf9fhLB","quantity":"8"},{"name":"Кефир","code":"2","price":"11","url":"https://cutt.ly/pf9fnR6","quantity":"9"},{"name":"Колбаса","code":"3","price":"24","url":"https://cutt.ly/nf9fDpm","quantity":"15"},{"name":"Мясо","code":"4","price":"35","url":"https://cutt.ly/of9fLJQ","quantity":"6"},{"name":"Конфеты","code":"5","price":"6","url":"https://cutt.ly/Xf9gqVU","quantity":"14"},{"name":"Печенье","code":"6","price":"4","url":"https://cutt.ly/Pf9gp5A","quantity":"53"},{"name":"Огурцы","code":"7","price":"2","url":"https://cutt.ly/Mf9gjAu","quantity":"75"},{"name":"Помидоры","code":"8","price":"3","url":"https://cutt.ly/jf9gzFe","quantity":"57"}]
 
 /***/ })
 /******/ ]);

@@ -20,6 +20,7 @@ class IsShop3 extends React.Component {
                 quantity: PropTypes.string.isRequired,
             })
         ),
+        nextID: PropTypes.number.isRequired,
     };
 
     state = {
@@ -35,29 +36,42 @@ class IsShop3 extends React.Component {
             price: "",
             url: "",
             quantity: "",
+            code: ""
         },
         nextID: this.props.nextID, // изначально 8 товаров
+        nameIsValid: null,
+        priceIsValid: null,
+        urlIsValid: null,
+        quantityIsValid: null,
+        valuesAreInValid: false,
+        btnsDisabled: false
     };
 
     selectedProduct = (code) => {
-        let currentProduct = this.state.productList.slice();
-        currentProduct = currentProduct.find(item => item.code==code);
-        this.setState({
-            currentProduct: currentProduct, 
-            workModeDescription: 1, 
-            highlitedLine: code,
-            workModeEdit: 0,
-        });
+        if (!this.state.btnsDisabled) {
+            let currentProduct = this.state.productList.slice();
+            currentProduct = currentProduct.find(item => item.code==code);
+            this.setState({
+                currentProduct: currentProduct, 
+                workModeDescription: 1, 
+                highlitedLine: code,
+                workModeEdit: 0,
+            });
+        }
     };
 
     editProduct = (code) => {
         let editedProduct = this.state.productList.slice();
         editedProduct = editedProduct.find(item => item.code==code);
         this.setState({
-            workModeDescription: 0, 
+            workModeDescription: 0,
             workModeEdit: 1,
             editedProduct: editedProduct,
             highlitedLine: code,
+            nameIsValid: true,
+            priceIsValid: true,
+            urlIsValid: true,
+            quantityIsValid: true,
         });
     };
     
@@ -82,20 +96,57 @@ class IsShop3 extends React.Component {
         }
     };
     
-    saveChanges = (qwe) => {
-        console.log(qwe)
+    saveChanges = (newProduct) => {
+        if (this.state.workModeEdit == 1) { // Сохранение отредактированного продукта
+            let editedProduct = this.state.productList.slice();
+            for (let i = 0; i < editedProduct.length; i++) { // Не использовал forEach, т.к. нельзя прервать цикл
+                if(editedProduct[i].code == newProduct.code) {
+                    editedProduct[i] = newProduct;
+                    this.setState({
+                        productList: editedProduct,
+                        workModeEdit: 0,
+                        btnsDisabled: false
+                    });
+                break;
+                }
+            }
+        } else if (this.state.workModeEdit == 2) { // Сохранение нового продукта
+            let newProductList = this.state.productList.slice();
+            newProductList.push(newProduct);
+            console.log(newProduct)
+            let nextID = this.state.nextID;
+            nextID++;
+            this.setState({
+                productList: newProductList,
+                nextID: nextID,
+                workModeEdit: 0,
+                btnsDisabled: false
+            })
+        }
     }
 
     cancelChanges = () => {
-        console.log("отменяю")
+        this.setState({
+            workModeEdit: 0,
+            btnsDisabled: false
+        })
     }
 
-    newProduct = (EO) => {
-        console.log("Создаю новый")
+    disableBtns = () => {
+        this.setState({
+            btnsDisabled: true
+        })
+    }
+
+    newProduct = () => {
         this.setState({
             workModeEdit: 2,
             workModeDescription: 0,
             highlitedLine: 0,
+            nameIsValid: false,
+            priceIsValid: false,
+            urlIsValid: false,
+            quantityIsValid: false,
         })
     }
 
@@ -103,7 +154,7 @@ class IsShop3 extends React.Component {
         let products = this.state.productList.map(item =>
             <Product
                 key={item.code}
-                code={item.code}
+                code={item.code.toString()}
                 name={item.name}
                 price={item.price}
                 url={item.url}
@@ -112,6 +163,7 @@ class IsShop3 extends React.Component {
                 cbDeleteProduct={this.deleteProduct}
                 cbEditProduct={this.editProduct}
                 selected={(this.state.highlitedLine == item.code)?true:false}
+                btnsDisabled={this.state.btnsDisabled}
             />
         );
         return (
@@ -129,7 +181,7 @@ class IsShop3 extends React.Component {
                     </thead>
                     <tbody className="Products">{products}</tbody>
                 </table>
-                <input type="button" value="New product" onClick={this.newProduct}/>
+                <input type="button" value="New product" disabled={this.state.btnsDisabled} onClick={this.newProduct}/>
                 { 
                     (this.state.workModeDescription == 1) &&
                     <ProductDescription 
@@ -141,7 +193,6 @@ class IsShop3 extends React.Component {
                         quantity={this.state.currentProduct.quantity}
                     />
                 }
-                {console.log(this.state.workModeEdit)}
                 {   
                     (this.state.workModeEdit == 1) && 
                     <EditProduct
@@ -150,6 +201,13 @@ class IsShop3 extends React.Component {
                         editedProduct={this.state.editedProduct}
                         cbSaveChanges={this.saveChanges}
                         cbCancelChanges={this.cancelChanges}
+                        cbDisableBtns={this.disableBtns}
+                        nameIsValid={this.state.nameIsValid}
+                        priceIsValid={this.state.priceIsValid}
+                        urlIsValid={this.state.urlIsValid}
+                        quantityIsValid={this.state.quantityIsValid}
+                        valuesAreInValid={this.state.valuesAreInValid}
+                        btnsDisabled={this.state.btnsDisabled}
                     /> 
                     ||
                     (this.state.workModeEdit == 2) &&
@@ -159,7 +217,14 @@ class IsShop3 extends React.Component {
                         editedProduct={this.state.newProduct}
                         cbSaveChanges={this.saveChanges}
                         cbCancelChanges={this.cancelChanges}
+                        cbDisableBtns={this.disableBtns}
                         nextID={this.state.nextID}
+                        nameIsValid={this.state.nameIsValid}
+                        priceIsValid={this.state.priceIsValid}
+                        urlIsValid={this.state.urlIsValid}
+                        quantityIsValid={this.state.quantityIsValid}
+                        valuesAreInValid={!this.state.valuesAreInValid}
+                        btnsDisabled={this.state.btnsDisabled}
                     />
                 }
             </Fragment>

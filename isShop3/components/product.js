@@ -15,6 +15,7 @@ class Product extends React.Component {
         cbDeleteProduct: PropTypes.func.isRequired,
         cbEditProduct: PropTypes.func.isRequired,
         selected: PropTypes.bool.isRequired,
+        btnsDisabled: PropTypes.bool.isRequired
     };
 
     
@@ -41,8 +42,8 @@ class Product extends React.Component {
                 <td>{this.props.price}</td>
                 <td>{this.props.quantity}</td>
                 <td>
-                    <input type="button" value="Edit" onClick={this.editProduct}/>
-                    <input type="button" value="Delete" onClick={this.deleteProduct}/>
+                    <input type="button" value="Edit" disabled={this.props.btnsDisabled} onClick={this.editProduct}/>
+                    <input type="button" value="Delete" disabled={this.props.btnsDisabled} onClick={this.deleteProduct}/>
                 </td>
             </tr>
         )
