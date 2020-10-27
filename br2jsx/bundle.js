@@ -545,11 +545,10 @@ var _BR2JSX2 = _interopRequireDefault(_BR2JSX);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var shopName = "Продуктовый магазин";
-var nextID = 9;
+var text = "первый<br>второй<br/>третий<br />последний";
+
 _reactDom2.default.render(_react2.default.createElement(_BR2JSX2.default, {
-    shop: shopName,
-    nextID: nextID
+    text: text
 }), document.getElementById("container"));
 
 /***/ }),
@@ -29185,20 +29184,39 @@ var BR2JSX = function (_React$Component) {
     _inherits(BR2JSX, _React$Component);
 
     function BR2JSX() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, BR2JSX);
 
-        return _possibleConstructorReturn(this, (BR2JSX.__proto__ || Object.getPrototypeOf(BR2JSX)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = BR2JSX.__proto__ || Object.getPrototypeOf(BR2JSX)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            text: _this.props.text
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(BR2JSX, [{
         key: 'render',
         value: function render() {
-            var text = "первый<br>второй<br/>третий<br />последний";
-            /* return <BR2JSX text={text}/>; */
+            var regexp = /<[^<>]+>/g;
+            var arr = this.state.text;
+            var s = arr.split(regexp);
+            var newarr = [];
+            for (var i = 0; i < s.length; i++) {
+                newarr.push(s[i]);
+                if (i == s.length - 1) {
+                    break;
+                };
+                newarr.push(_react2.default.createElement('br', { key: i }));
+            }
             return _react2.default.createElement(
-                'span',
+                'div',
                 null,
-                text
+                newarr
             );
         }
     }]);
@@ -29206,6 +29224,9 @@ var BR2JSX = function (_React$Component) {
     return BR2JSX;
 }(_react2.default.Component);
 
+BR2JSX.propTypes = {
+    text: _propTypes2.default.string.isRequired
+};
 exports.default = BR2JSX;
 
 /***/ }),
