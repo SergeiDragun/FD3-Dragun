@@ -29203,12 +29203,12 @@ var BR2JSX = function (_React$Component) {
         key: 'render',
         value: function render() {
             var regexp = /<[^<>]+>/g;
-            var arr = this.state.text;
-            var s = arr.split(regexp);
+            var string = this.state.text;
+            var arr = string.split(regexp);
             var newarr = [];
-            for (var i = 0; i < s.length; i++) {
-                newarr.push(s[i]);
-                if (i == s.length - 1) {
+            for (var i = 0; i < arr.length; i++) {
+                newarr.push(arr[i]);
+                if (i == arr.length - 1) {
                     break;
                 };
                 newarr.push(_react2.default.createElement('br', { key: i }));
