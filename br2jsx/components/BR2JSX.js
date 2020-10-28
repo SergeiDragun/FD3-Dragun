@@ -16,14 +16,11 @@ class BR2JSX extends React.Component {
         let string = this.state.text;
         let arr = string.split(regexp);
         let newarr = [];
-        for (let i = 0; i < arr.length; i++) {
-            newarr.push(arr[i]);
-            (i==arr.length-1) || newarr.push(<br key={i}/>);
-            /* if (i==arr.length-1) {
-                break;
-            };
-            newarr.push(<br key={i}/>); */
-        }
+        arr.forEach((v, i) => {
+            if (i)
+            newarr.push(<br key={i}/>);
+            newarr.push(v);
+        });
         return <div>{newarr}</div>;
     }
 }

@@ -29202,17 +29202,14 @@ var BR2JSX = function (_React$Component) {
     _createClass(BR2JSX, [{
         key: 'render',
         value: function render() {
-            var regexp = /<[^<>]+>/g;
+            var regexp = /<[^<>]+>/;
             var string = this.state.text;
             var arr = string.split(regexp);
             var newarr = [];
-            for (var i = 0; i < arr.length; i++) {
-                newarr.push(arr[i]);
-                if (i == arr.length - 1) {
-                    break;
-                };
-                newarr.push(_react2.default.createElement('br', { key: i }));
-            }
+            arr.forEach(function (v, i) {
+                if (i) newarr.push(_react2.default.createElement('br', { key: i }));
+                newarr.push(v);
+            });
             return _react2.default.createElement(
                 'div',
                 null,
