@@ -29182,14 +29182,11 @@ var RainbowFrame = function RainbowFrame(props) {
     var renderFrames = function renderFrames(colors) {
         length -= 1;
         index += 1;
-        if (length == 0) {
-            return _react2.default.createElement(
-                'div',
-                { style: { border: "solid 10px " + colors[index], padding: "10px" } },
-                props.children
-            );
-        }
-        return _react2.default.createElement(
+        return length == 0 ? _react2.default.createElement(
+            'div',
+            { style: { border: "solid 10px " + colors[index], padding: "10px" } },
+            props.children
+        ) : _react2.default.createElement(
             'div',
             { style: { border: "solid 10px " + colors[index], padding: "10px" } },
             renderFrames(colors)

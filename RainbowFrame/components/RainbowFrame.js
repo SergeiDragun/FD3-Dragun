@@ -9,10 +9,13 @@ const RainbowFrame = (props) => {
     const renderFrames = (colors) => {
         length-=1;
         index+=1;
-        if (length == 0) {
-            return <div style={{border:"solid 10px "+colors[index],padding:"10px"}}>{props.children}</div>
-        }
-        return <div style={{border:"solid 10px "+colors[index],padding:"10px"}}>{renderFrames(colors)}</div>
+        return (
+            (length == 0)
+            ?
+            <div style={{border:"solid 10px "+colors[index],padding:"10px"}}>{props.children}</div>
+            :
+            <div style={{border:"solid 10px "+colors[index],padding:"10px"}}>{renderFrames(colors)}</div>
+        )
     }
     
     return renderFrames(props.colors);
