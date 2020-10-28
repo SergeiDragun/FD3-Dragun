@@ -1,0 +1,38 @@
+{
+  "name": "rainbowframe",
+  "version": "1.0.0",
+  "description": "task6",
+  "main": "App.js",
+  "scripts": {
+    "build": ".\\node_modules\\.bin\\webpack",
+    "start": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeiDragun/FD3-Dragun.git"
+  },
+  "author": "Dragun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeiDragun/FD3-Dragun/issues"
+  },
+  "homepage": "https://github.com/SergeiDragun/FD3-Dragun#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-dom-factories": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "lite-server": "^2.3.0",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^2.9.4"
+  }
+}
