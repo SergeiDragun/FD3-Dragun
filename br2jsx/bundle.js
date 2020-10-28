@@ -29202,7 +29202,7 @@ var BR2JSX = function (_React$Component) {
     _createClass(BR2JSX, [{
         key: 'render',
         value: function render() {
-            var regexp = /<[^<>]+>/;
+            var regexp = /<br *\/?>/i;
             var string = this.state.text;
             var arr = string.split(regexp);
             var newarr = [];

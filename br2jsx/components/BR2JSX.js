@@ -12,7 +12,7 @@ class BR2JSX extends React.Component {
     }
 
     render() {
-        let regexp = /<[^<>]+>/;
+        let regexp = /<br *\/?>/i;
         let string = this.state.text;
         let arr = string.split(regexp);
         let newarr = [];
