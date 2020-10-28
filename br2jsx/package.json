@@ -1,7 +1,7 @@
 {
-  "name": "isshop3",
+  "name": "br2jsx",
   "version": "1.0.0",
-  "description": "task4",
+  "description": "task5",
   "main": "App.js",
   "scripts": {
     "build": ".\\node_modules\\.bin\\webpack",
