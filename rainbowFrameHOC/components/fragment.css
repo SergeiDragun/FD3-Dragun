@@ -1,5 +1,5 @@
 .text {
-    display: flex;
-    justify-content: center;
+    display: inline-block;
     font-family: cursive;
+    text-align: center;
 }

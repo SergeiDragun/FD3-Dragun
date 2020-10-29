@@ -1,7 +1,7 @@
 import React from 'react';
 import './frame.css'
 
-let withRainbowFrame = colors => Component => props => {
+const withRainbowFrame = colors => Component => props => {
 
     let rainbowFrame = <Component {...props} />;
     
