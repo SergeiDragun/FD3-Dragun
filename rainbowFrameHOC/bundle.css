@@ -1,0 +1,13 @@
+.text {
+    display: flex;
+    justify-content: center;
+    font-family: cursive;
+}
+
+.frame {
+    max-width: 500px;
+    border: 10px solid;
+    margin: auto;
+    padding: 5px;
+}
+/*# sourceMappingURL=bundle.css.map*/
