@@ -1,0 +1,7 @@
+
+.frame {
+    max-width: 500px;
+    border: 10px solid;
+    margin: auto;
+    padding: 5px;
+}
