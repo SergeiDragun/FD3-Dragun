@@ -29195,19 +29195,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DoubleButton = function DoubleButton(props) {
 
-    var pressed = function pressed(EO) {
-        props.cbPressed(EO.target.value);
+    var pressed = function pressed(caption) {
+
+        caption == props.caption1 ? props.cbPressed("Нажата первая кнопка") : props.cbPressed("Нажата вторая кнопка");
     };
+
     return _react2.default.createElement(
         'div',
         { className: 'btnsBlock' },
-        _react2.default.createElement('input', { type: 'button', value: props.caption1, onClick: pressed }),
+        _react2.default.createElement('input', { type: 'button', value: props.caption1, onClick: function onClick() {
+                return pressed(props.caption1);
+            } }),
         _react2.default.createElement(
             'span',
             null,
             props.children
         ),
-        _react2.default.createElement('input', { type: 'button', value: props.caption2, onClick: pressed })
+        _react2.default.createElement('input', { type: 'button', value: props.caption2, onClick: function onClick() {
+                return pressed(props.caption2);
+            } })
     );
 };
 
@@ -29216,6 +29222,7 @@ DoubleButton.propTypes = {
     caption2: _propTypes2.default.string.isRequired,
     cbPressed: _propTypes2.default.func.isRequired
 };
+
 exports.default = DoubleButton;
 
 /***/ }),

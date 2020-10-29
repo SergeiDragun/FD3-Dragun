@@ -1,20 +1,26 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './doubleButton.css';
 
-
 const DoubleButton = (props) => {
 
-    const pressed = (EO) => {
-        props.cbPressed(EO.target.value)
-    }
+    const pressed = (caption) =>  {
+
+        (caption == props.caption1)
+        ?
+        props.cbPressed("Нажата первая кнопка")
+        :
+        props.cbPressed("Нажата вторая кнопка")
+
+    };
+
     return (
-    <div className="btnsBlock">
-        <input type="button" value={props.caption1} onClick={pressed}/>
-        <span>{props.children}</span>
-        <input type="button" value={props.caption2} onClick={pressed}/>
-    </div>
-    )
+        <div className="btnsBlock">
+            <input type="button" value={props.caption1} onClick={()=>pressed(props.caption1)}/>
+            <span>{props.children}</span>
+            <input type="button" value={props.caption2} onClick={()=>pressed(props.caption2)}/>
+        </div>
+    );
 }
 
 DoubleButton.propTypes = {
@@ -22,4 +28,5 @@ DoubleButton.propTypes = {
     caption2: PropTypes.string.isRequired,
     cbPressed: PropTypes.func.isRequired,
 }
+
 export default DoubleButton;
