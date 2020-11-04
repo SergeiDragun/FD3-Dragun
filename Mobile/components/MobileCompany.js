@@ -8,9 +8,12 @@ import './style.css'
 class MobileCompany extends React.PureComponent {
 
     constructor(props) {
+
         super(props)
 
-        this.changed = false
+        this.sortedActive = false
+        this.sortedBlocked = false
+        this.clientsInfo = null
         this.firstCompanyName = React.createRef()
         this.secondCompanyName = React.createRef()
     }
@@ -33,15 +36,13 @@ class MobileCompany extends React.PureComponent {
     state = {
         companyName: this.props.companyName,
         companies: this.props.companies,
-        filterBlocked: false,
-        filterActive: false
+        filteredList: null
     }
 
     
     componentDidMount = () => {
         myEvents.addListener("E_DelClient", this.delClient)
-        myEvents.addListener("E_EditCLient", this.editClient)
-        console.log("qwe")
+        myEvents.addListener("E_EditClient", this.editClient)
     }
 
     componentWillUnmount = () => {
@@ -49,73 +50,84 @@ class MobileCompany extends React.PureComponent {
         myEvents.removeListener("E_EditClient", this.editClient)
     }
 
-    delClient = (client) => {
 
-        let companyName = this.state.companyName
-        let companies = {...this.state.companies}
-        let clients = [...companies[companyName]]
-        let newClients = clients.filter(v=>v.code != client.code)
-        companies[companyName] = newClients
-        /* if (this.state.companies[company].length != activeClients.length) {
-            this.changed = true */
+    delClient = (client) => {
+            let companyName = this.state.companyName
+            let companies = {...this.state.companies}
+            let clients = [...companies[companyName]]
+            let newClients = clients.filter(v=>v.code != client.code)
+            companies[companyName] = newClients
+        if (this.state.filteredList) {
+            console.log("удаляю из отфильтрованного")
+            let filteredClients = [...this.state.filteredList]
+            let newFilteredClients = filteredClients.filter(v=>v.code != client.code)
+            this.setState({filteredList: newFilteredClients, companies: companies})
+        } else {
             this.setState({companies: companies})
-        /* } */
+        }
     }
 
-    editClient = () => {
-        console.log("Редактирую клиента")
+    editClient = (client) => {
+        console.log("Редактирую "+client.name)
+        
     }
 
     setName = (name) => {
-        if (this.changed && this.state.companyName != name.current.value) {
-            this.selectAll()
-        }
-        this.setState({companyName: name.current.value})
+        if (this.state.companyName != name.current.value) {
+            this.setState({companyName: name.current.value}, ()=> this.selectAll())
+        } 
     }
 
     selectAll = () => {
-        this.changed = false
-        this.setState({companies: this.props.companies})
+        if (this.sortedActive === false && this.sortedBlocked === false) {
+            return   
+        }
+        this.sortedActive = false
+        this.sortedBlocked = false
+        let companies = {...this.state.companies}
+        this.setState({filteredList: null, companies: companies})
     }
 
-    filteredList = null
-
     selectActive = () => {
-        let companies = {...this.props.companies}
+        let companies = {...this.state.companies}
         let company = this.state.companyName
         let clients = [...companies[company]]
-        /* let clients = [...this.state.companies[company]] */
         let activeClients = clients.filter(client=>client.balance > 0)
-        this.filteredList = activeClients
-        companies[company] = activeClients
-        if (this.state.companies[company].length != activeClients.length) {
-            this.changed = true
-            this.setState({companies: companies}, ()=> console.log(this.state.companies))
+        this.sortedBlocked = false
+        if (!this.sortedActive) {
+            this.sortedActive = true
+            this.setState({filteredList: activeClients})
         }
+        
     }
 
     selectBlocked = () => {
-        let companies = {...this.props.companies}
+        
+        let companies = {...this.state.companies}
         let company = this.state.companyName
         let clients = [...companies[company]]
-        /* let clients = [...this.state.companies[company]] */
-        let activeClients = clients.filter(client => client.balance <= 0)
-        this.filteredList = activeClients
-        companies[company] = activeClients
-        if (this.state.companies[company].length != activeClients.length) {
-            this.changed = true
-            this.setState({companies: companies}, () => console.log(this.state.companies))
+        let blockedClients = clients.filter(client => client.balance <= 0)
+        this.sortedActive = false
+        if (!this.sortedBlocked) {
+            this.sortedBlocked = true
+            this.setState({filteredList: blockedClients})
         }
     }
-
+    
     render() {
         
         console.log("MobileCompany render")
 
-        let company = this.state.companies[this.state.companyName]
-        let clientsInfo = company.map(client =>
-            <MobileClients key={client.code} info={client}/>   
-        )
+        if (this.state.filteredList) {
+            this.clientsInfo = [...this.state.filteredList].map(client =>
+                <MobileClients key={client.code} info={client}/>   
+            )
+        } else {
+            let company = this.state.companies[this.state.companyName]
+            this.clientsInfo = company.map(client =>
+                <MobileClients key={client.code} info={client}/>   
+            )
+        }
 
         return (
             <div className='mobileCompany'>
@@ -150,7 +162,7 @@ class MobileCompany extends React.PureComponent {
                                 <th>Удалить</th>
                             </tr>
                         </thead>
-                        <tbody className="clients_info">{clientsInfo}</tbody>
+                        <tbody className="clients_info">{this.clientsInfo}</tbody>
                     </table>
                 </div>
             </div>

@@ -19,7 +19,11 @@ class MobileClients extends React.PureComponent {
     }
 
     delClient = () => {
-        myEvents.emit("E_DelClient", this.props.info)
+        myEvents.emit("E_DelClient", this.state.info)
+    }
+
+    editClient = () => {
+        myEvents.emit("E_EditClient", this.state.info)
     }
 
     render() {
@@ -27,6 +31,7 @@ class MobileClients extends React.PureComponent {
         console.log("MobileClients id="+this.state.info.code+" render")
 
         return (
+            
             <tr>
                 <td>{this.state.info.fam}</td>
                 <td>{this.state.info.name}</td>
