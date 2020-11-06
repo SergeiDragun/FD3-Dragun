@@ -1,19 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MobileClients from './MobileClients'
-import {myEvents} from './events'
+import EditClient from './EditClient'
+import {EventEmitter} from 'events'
 
 import './style.css'
 
 class MobileCompany extends React.PureComponent {
 
     constructor(props) {
-
         super(props)
-
-        this.sortedActive = false
-        this.sortedBlocked = false
-        this.clientsInfo = null
+        this.nextID = 9
+        this.myEvents = new EventEmitter()
         this.firstCompanyName = React.createRef()
         this.secondCompanyName = React.createRef()
     }
@@ -36,99 +34,107 @@ class MobileCompany extends React.PureComponent {
     state = {
         companyName: this.props.companyName,
         companies: this.props.companies,
-        filteredList: null
+        filteredList: 0, // 0 - all, 1 - active, 2 - blocked
+        editClient: 0, // 0 - не редактируем, 1 - редактируем 2 - добавляем нового
+        editedClient: null
     }
 
     
     componentDidMount = () => {
-        myEvents.addListener("E_DelClient", this.delClient)
-        myEvents.addListener("E_EditClient", this.editClient)
+        this.myEvents.addListener("E_DelClient", this.delClient)
+        this.myEvents.addListener("E_EditClient", this.editClient)
+        this.myEvents.addListener("E_SaveClient", this.saveClient)
     }
 
     componentWillUnmount = () => {
-        myEvents.removeListener("E_DelClient", this.delClient)
-        myEvents.removeListener("E_EditClient", this.editClient)
+        this.myEvents.removeListener("E_DelClient", this.delClient)
+        this.myEvents.removeListener("E_EditClient", this.editClient)
     }
 
-
     delClient = (client) => {
-            let companyName = this.state.companyName
-            let companies = {...this.state.companies}
-            let clients = [...companies[companyName]]
-            let newClients = clients.filter(v=>v.code != client.code)
-            companies[companyName] = newClients
-        if (this.state.filteredList) {
-            console.log("удаляю из отфильтрованного")
-            let filteredClients = [...this.state.filteredList]
-            let newFilteredClients = filteredClients.filter(v=>v.code != client.code)
-            this.setState({filteredList: newFilteredClients, companies: companies})
-        } else {
-            this.setState({companies: companies})
-        }
+        let companyName = this.state.companyName
+        let companies = {...this.state.companies}
+        let clients = [...companies[companyName]]
+        let newClients = clients.filter(v=>v.code != client.code)
+        companies[companyName] = newClients
+        this.setState({companies: companies})
     }
 
     editClient = (client) => {
-        console.log("Редактирую "+client.name)
-        
+        let companies = {...this.state.companies}
+        this.setState({editClient: 1, editedClient: client, companies: companies})
+    }
+
+    addNewClient = () => {
+        this.setState({editClient: 2})
+    }
+
+    saveClient = (newClient) => {
+
+            let companyName = this.state.companyName
+            let companies = {...this.state.companies}
+            let clients = [...companies[companyName]]
+
+        if (this.state.editClient==1) { // Сохраняю отредактированного
+
+            let index = clients.findIndex(client=>client.code==newClient.code)
+            clients[index] = newClient
+            companies[companyName] = clients
+            this.setState({companies: companies, editClient: 0, editedClient: null})
+
+        } else { // Сохраняю нового
+
+            clients.push(newClient)
+            this.nextID++
+            companies[companyName] = clients
+            this.setState({companies: companies, editClient: 0, editedClient: null})
+
+        }
     }
 
     setName = (name) => {
         if (this.state.companyName != name.current.value) {
-            this.setState({companyName: name.current.value}, ()=> this.selectAll())
-        } 
+            this.selectAll()
+            this.setState({companyName: name.current.value})
+        }
     }
 
     selectAll = () => {
-        if (this.sortedActive === false && this.sortedBlocked === false) {
-            return   
-        }
-        this.sortedActive = false
-        this.sortedBlocked = false
-        let companies = {...this.state.companies}
-        this.setState({filteredList: null, companies: companies})
+        this.setState({filteredList: 0})
     }
 
     selectActive = () => {
-        let companies = {...this.state.companies}
-        let company = this.state.companyName
-        let clients = [...companies[company]]
-        let activeClients = clients.filter(client=>client.balance > 0)
-        this.sortedBlocked = false
-        if (!this.sortedActive) {
-            this.sortedActive = true
-            this.setState({filteredList: activeClients})
-        }
-        
+        this.setState({filteredList: 1})
     }
 
     selectBlocked = () => {
-        
-        let companies = {...this.state.companies}
-        let company = this.state.companyName
-        let clients = [...companies[company]]
-        let blockedClients = clients.filter(client => client.balance <= 0)
-        this.sortedActive = false
-        if (!this.sortedBlocked) {
-            this.sortedBlocked = true
-            this.setState({filteredList: blockedClients})
-        }
+        this.setState({filteredList: 2})
     }
     
     render() {
         
         console.log("MobileCompany render")
 
-        if (this.state.filteredList) {
-            this.clientsInfo = [...this.state.filteredList].map(client =>
-                <MobileClients key={client.code} info={client}/>   
+        let company = this.state.companyName
+        let companies = {...this.state.companies}
+        let clients = [...companies[company]]
+        let clientsInfo
+        
+        if (this.state.filteredList === 0) 
+            clientsInfo = clients.map(client =>
+                <MobileClients key={client.code} info={client} events={this.myEvents}/>   
             )
-        } else {
-            let company = this.state.companies[this.state.companyName]
-            this.clientsInfo = company.map(client =>
-                <MobileClients key={client.code} info={client}/>   
+        
+        if (this.state.filteredList === 1) 
+            clientsInfo = clients.map(client =>
+                (client.balance > 0) && <MobileClients key={client.code} info={client} events={this.myEvents}/>   
             )
-        }
-
+        
+        if (this.state.filteredList === 2) 
+            clientsInfo = clients.map(client =>
+                (client.balance <= 0) && <MobileClients key={client.code} info={client} events={this.myEvents}/>   
+            )
+        
         return (
             <div className='mobileCompany'>
                 <div className='mobileCompanyName'>
@@ -162,9 +168,28 @@ class MobileCompany extends React.PureComponent {
                                 <th>Удалить</th>
                             </tr>
                         </thead>
-                        <tbody className="clients_info">{this.clientsInfo}</tbody>
+                        <tbody className="clients_info">{clientsInfo}</tbody>
                     </table>
                 </div>
+                <input type='button'value='Добавить' onClick={this.addNewClient}/>
+                {
+                    this.state.editClient == 1 // Релактирую
+                    && 
+                    <EditClient workmode={this.state.editClient} 
+                                events={this.myEvents} 
+                                info={this.state.editedClient}
+                                key={this.state.editedClient.code}
+                    />
+                }
+
+                {
+                    this.state.editClient == 2 // Добавляю
+                    && 
+                    <EditClient workmode={this.state.editClient} 
+                                events={this.myEvents} 
+                                nextID={this.nextID}
+                    />
+                }
             </div>
         )
     }

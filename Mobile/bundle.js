@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -261,9 +261,9 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(11);
+  module.exports = __webpack_require__(10);
 } else {
-  module.exports = __webpack_require__(12);
+  module.exports = __webpack_require__(11);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -498,21 +498,6 @@ module.exports = ReactPropTypesSecret;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(15);
-} else {
-  module.exports = __webpack_require__(16);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -521,19 +506,25 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(7);
+  var ReactIs = __webpack_require__(8);
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(24)(ReactIs.isElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(23)(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(25)();
+  module.exports = __webpack_require__(24)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 7 */
@@ -543,9 +534,9 @@ if (process.env.NODE_ENV !== 'production') {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(22);
+  module.exports = __webpack_require__(14);
 } else {
-  module.exports = __webpack_require__(23);
+  module.exports = __webpack_require__(15);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -555,27 +546,18 @@ if (process.env.NODE_ENV === 'production') {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
 
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(21);
+} else {
+  module.exports = __webpack_require__(22);
+}
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.myEvents = undefined;
-
-var _events = __webpack_require__(27);
-
-var myEvents = new _events.EventEmitter();
-
-exports.myEvents = myEvents;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -585,11 +567,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(13);
+var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _MobileCompany = __webpack_require__(21);
+var _MobileCompany = __webpack_require__(20);
 
 var _MobileCompany2 = _interopRequireDefault(_MobileCompany);
 
@@ -604,7 +586,7 @@ _reactDom2.default.render(_react2.default.createElement(_MobileCompany2.default,
 }), document.getElementById("container"));
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -636,7 +618,7 @@ exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.u
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2556,7 +2538,7 @@ exports.version = ReactVersion;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2594,15 +2576,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(14);
+  module.exports = __webpack_require__(13);
 } else {
-  module.exports = __webpack_require__(17);
+  module.exports = __webpack_require__(16);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2618,7 +2600,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(5);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
+var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(7);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
 function ba(a,b,c,d,e,f,g,h,k){var l=Array.prototype.slice.call(arguments,3);try{b.apply(c,l)}catch(m){this.onError(m)}}var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,k){da=!1;ea=null;ba.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,k){ja.apply(this,arguments);if(da){if(da){var l=ea;da=!1;ea=null}else throw Error(u(198));fa||(fa=!0,ha=l)}}var la=null,ma=null,na=null;
 function oa(a,b,c){var d=a.type||"unknown-event";a.currentTarget=na(c);ka(d,b,void 0,a);a.currentTarget=null}var pa=null,qa={};
 function ra(){if(pa)for(var a in qa){var b=qa[a],c=pa.indexOf(a);if(!(-1<c))throw Error(u(96,a));if(!sa[c]){if(!b.extractEvents)throw Error(u(97,a));sa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;if(ta.hasOwnProperty(h))throw Error(u(99,h));ta[h]=f;var k=f.phasedRegistrationNames;if(k){for(e in k)k.hasOwnProperty(e)&&ua(k[e],g,h);e=!0}else f.registrationName?(ua(f.registrationName,g,h),e=!0):e=!1;if(!e)throw Error(u(98,d,a));}}}}
@@ -2901,7 +2883,7 @@ exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Er
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2929,7 +2911,7 @@ exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3795,7 +3777,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3818,9 +3800,9 @@ if (process.env.NODE_ENV !== "production") {
 
 var React = __webpack_require__(1);
 var _assign = __webpack_require__(2);
-var Scheduler = __webpack_require__(5);
+var Scheduler = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(3);
-var tracing = __webpack_require__(18);
+var tracing = __webpack_require__(17);
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
 // Current owner and dispatcher used to share the same ref,
@@ -28815,22 +28797,22 @@ exports.version = ReactVersion;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(19);
+  module.exports = __webpack_require__(18);
 } else {
-  module.exports = __webpack_require__(20);
+  module.exports = __webpack_require__(19);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28847,7 +28829,7 @@ var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unst
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29204,7 +29186,7 @@ exports.unstable_wrap = unstable_wrap;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29222,17 +29204,21 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _MobileClients = __webpack_require__(26);
+var _MobileClients = __webpack_require__(25);
 
 var _MobileClients2 = _interopRequireDefault(_MobileClients);
 
-var _events = __webpack_require__(8);
+var _EditClient = __webpack_require__(26);
 
-__webpack_require__(9);
+var _EditClient2 = _interopRequireDefault(_EditClient);
+
+var _events = __webpack_require__(27);
+
+__webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29255,17 +29241,20 @@ var MobileCompany = function (_React$PureComponent) {
         _this.state = {
             companyName: _this.props.companyName,
             companies: _this.props.companies,
-            filteredList: null
+            filteredList: 0, // 0 - all, 1 - active, 2 - blocked
+            editClient: 0, // 0 - не редактируем, 1 - редактируем 2 - добавляем нового
+            editedClient: null
         };
 
         _this.componentDidMount = function () {
-            _events.myEvents.addListener("E_DelClient", _this.delClient);
-            _events.myEvents.addListener("E_EditClient", _this.editClient);
+            _this.myEvents.addListener("E_DelClient", _this.delClient);
+            _this.myEvents.addListener("E_EditClient", _this.editClient);
+            _this.myEvents.addListener("E_SaveClient", _this.saveClient);
         };
 
         _this.componentWillUnmount = function () {
-            _events.myEvents.removeListener("E_DelClient", _this.delClient);
-            _events.myEvents.removeListener("E_EditClient", _this.editClient);
+            _this.myEvents.removeListener("E_DelClient", _this.delClient);
+            _this.myEvents.removeListener("E_EditClient", _this.editClient);
         };
 
         _this.delClient = function (client) {
@@ -29276,72 +29265,64 @@ var MobileCompany = function (_React$PureComponent) {
                 return v.code != client.code;
             });
             companies[companyName] = newClients;
-            if (_this.state.filteredList) {
-                console.log("удаляю из отфильтрованного");
-                var filteredClients = [].concat(_toConsumableArray(_this.state.filteredList));
-                var newFilteredClients = filteredClients.filter(function (v) {
-                    return v.code != client.code;
-                });
-                _this.setState({ filteredList: newFilteredClients, companies: companies });
-            } else {
-                _this.setState({ companies: companies });
-            }
+            _this.setState({ companies: companies });
         };
 
         _this.editClient = function (client) {
-            console.log("Редактирую " + client.name);
+            var companies = _extends({}, _this.state.companies);
+            _this.setState({ editClient: 1, editedClient: client, companies: companies });
+        };
+
+        _this.addNewClient = function () {
+            _this.setState({ editClient: 2 });
+        };
+
+        _this.saveClient = function (newClient) {
+
+            var companyName = _this.state.companyName;
+            var companies = _extends({}, _this.state.companies);
+            var clients = [].concat(_toConsumableArray(companies[companyName]));
+
+            if (_this.state.editClient == 1) {
+                // Сохраняю отредактированного
+
+                var index = clients.findIndex(function (client) {
+                    return client.code == newClient.code;
+                });
+                clients[index] = newClient;
+                companies[companyName] = clients;
+                _this.setState({ companies: companies, editClient: 0, editedClient: null });
+            } else {
+                // Сохраняю нового
+
+                clients.push(newClient);
+                _this.nextID++;
+                companies[companyName] = clients;
+                _this.setState({ companies: companies, editClient: 0, editedClient: null });
+            }
         };
 
         _this.setName = function (name) {
             if (_this.state.companyName != name.current.value) {
-                _this.setState({ companyName: name.current.value }, function () {
-                    return _this.selectAll();
-                });
+                _this.selectAll();
+                _this.setState({ companyName: name.current.value });
             }
         };
 
         _this.selectAll = function () {
-            if (_this.sortedActive === false && _this.sortedBlocked === false) {
-                return;
-            }
-            _this.sortedActive = false;
-            _this.sortedBlocked = false;
-            var companies = _extends({}, _this.state.companies);
-            _this.setState({ filteredList: null, companies: companies });
+            _this.setState({ filteredList: 0 });
         };
 
         _this.selectActive = function () {
-            var companies = _extends({}, _this.state.companies);
-            var company = _this.state.companyName;
-            var clients = [].concat(_toConsumableArray(companies[company]));
-            var activeClients = clients.filter(function (client) {
-                return client.balance > 0;
-            });
-            _this.sortedBlocked = false;
-            if (!_this.sortedActive) {
-                _this.sortedActive = true;
-                _this.setState({ filteredList: activeClients });
-            }
+            _this.setState({ filteredList: 1 });
         };
 
         _this.selectBlocked = function () {
-
-            var companies = _extends({}, _this.state.companies);
-            var company = _this.state.companyName;
-            var clients = [].concat(_toConsumableArray(companies[company]));
-            var blockedClients = clients.filter(function (client) {
-                return client.balance <= 0;
-            });
-            _this.sortedActive = false;
-            if (!_this.sortedBlocked) {
-                _this.sortedBlocked = true;
-                _this.setState({ filteredList: blockedClients });
-            }
+            _this.setState({ filteredList: 2 });
         };
 
-        _this.sortedActive = false;
-        _this.sortedBlocked = false;
-        _this.clientsInfo = null;
+        _this.nextID = 9;
+        _this.myEvents = new _events.EventEmitter();
         _this.firstCompanyName = _react2.default.createRef();
         _this.secondCompanyName = _react2.default.createRef();
         return _this;
@@ -29354,16 +29335,22 @@ var MobileCompany = function (_React$PureComponent) {
 
             console.log("MobileCompany render");
 
-            if (this.state.filteredList) {
-                this.clientsInfo = [].concat(_toConsumableArray(this.state.filteredList)).map(function (client) {
-                    return _react2.default.createElement(_MobileClients2.default, { key: client.code, info: client });
-                });
-            } else {
-                var company = this.state.companies[this.state.companyName];
-                this.clientsInfo = company.map(function (client) {
-                    return _react2.default.createElement(_MobileClients2.default, { key: client.code, info: client });
-                });
-            }
+            var company = this.state.companyName;
+            var companies = _extends({}, this.state.companies);
+            var clients = [].concat(_toConsumableArray(companies[company]));
+            var clientsInfo = void 0;
+
+            if (this.state.filteredList === 0) clientsInfo = clients.map(function (client) {
+                return _react2.default.createElement(_MobileClients2.default, { key: client.code, info: client, events: _this2.myEvents });
+            });
+
+            if (this.state.filteredList === 1) clientsInfo = clients.map(function (client) {
+                return client.balance > 0 && _react2.default.createElement(_MobileClients2.default, { key: client.code, info: client, events: _this2.myEvents });
+            });
+
+            if (this.state.filteredList === 2) clientsInfo = clients.map(function (client) {
+                return client.balance <= 0 && _react2.default.createElement(_MobileClients2.default, { key: client.code, info: client, events: _this2.myEvents });
+            });
 
             return _react2.default.createElement(
                 'div',
@@ -29450,10 +29437,22 @@ var MobileCompany = function (_React$PureComponent) {
                         _react2.default.createElement(
                             'tbody',
                             { className: 'clients_info' },
-                            this.clientsInfo
+                            clientsInfo
                         )
                     )
-                )
+                ),
+                _react2.default.createElement('input', { type: 'button', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onClick: this.addNewClient }),
+                this.state.editClient == 1 // Релактирую
+                && _react2.default.createElement(_EditClient2.default, { workmode: this.state.editClient,
+                    events: this.myEvents,
+                    info: this.state.editedClient,
+                    key: this.state.editedClient.code
+                }),
+                this.state.editClient == 2 // Добавляю
+                && _react2.default.createElement(_EditClient2.default, { workmode: this.state.editClient,
+                    events: this.myEvents,
+                    nextID: this.nextID
+                })
             );
         }
     }]);
@@ -29476,7 +29475,7 @@ MobileCompany.propTypes = {
 exports.default = MobileCompany;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29498,7 +29497,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29687,7 +29686,7 @@ exports.typeOf = typeOf;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29700,7 +29699,7 @@ exports.typeOf = typeOf;
 
 
 
-var ReactIs = __webpack_require__(7);
+var ReactIs = __webpack_require__(8);
 var assign = __webpack_require__(2);
 
 var ReactPropTypesSecret = __webpack_require__(4);
@@ -30286,7 +30285,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30357,7 +30356,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30373,13 +30372,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _events = __webpack_require__(8);
-
-__webpack_require__(9);
+__webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30392,24 +30389,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var MobileClients = function (_React$PureComponent) {
     _inherits(MobileClients, _React$PureComponent);
 
-    function MobileClients() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function MobileClients(props) {
         _classCallCheck(this, MobileClients);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (MobileClients.__proto__ || Object.getPrototypeOf(MobileClients)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MobileClients.__proto__ || Object.getPrototypeOf(MobileClients)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        _this.state = {
             info: _this.props.info
-        }, _this.delClient = function () {
-            _events.myEvents.emit("E_DelClient", _this.state.info);
-        }, _this.editClient = function () {
-            _events.myEvents.emit("E_EditClient", _this.state.info);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.delClient = function () {
+            _this.props.events.emit("E_DelClient", _this.state.info);
+        };
+
+        _this.editClient = function () {
+            var nc = {
+                fam: _this.state.info.fam,
+                name: _this.state.info.name,
+                otch: _this.state.info.otch,
+                balance: _this.state.info.balance,
+                code: _this.state.info.code
+            };
+            _this.props.events.emit("E_EditClient", nc);
+        };
+
+        return _this;
     }
 
     _createClass(MobileClients, [{
@@ -30424,27 +30428,27 @@ var MobileClients = function (_React$PureComponent) {
                 _react2.default.createElement(
                     'td',
                     null,
-                    this.state.info.fam
+                    this.props.info.fam
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    this.state.info.name
+                    this.props.info.name
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    this.state.info.otch
+                    this.props.info.otch
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    this.state.info.balance
+                    this.props.info.balance
                 ),
                 _react2.default.createElement(
                     'td',
-                    { className: this.state.info.balance <= 0 ? 'blocked' : 'active' },
-                    this.state.info.balance <= 0 ? 'blocked' : 'active'
+                    { className: this.props.info.balance <= 0 ? 'blocked' : 'active' },
+                    this.props.info.balance <= 0 ? 'blocked' : 'active'
                 ),
                 _react2.default.createElement(
                     'td',
@@ -30470,9 +30474,154 @@ MobileClients.propTypes = {
         otch: _propTypes2.default.string.isRequired,
         fam: _propTypes2.default.string.isRequired,
         balance: _propTypes2.default.number.isRequired
-    })
+    }),
+    events: _propTypes2.default.object.isRequired
 };
 exports.default = MobileClients;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditProduct = function (_React$PureComponent) {
+    _inherits(EditProduct, _React$PureComponent);
+
+    function EditProduct(props) {
+        _classCallCheck(this, EditProduct);
+
+        var _this = _possibleConstructorReturn(this, (EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call(this, props));
+
+        _this.state = {
+            fam: null,
+            balance: null,
+            editedClient: _this.props.info
+        };
+
+        _this.save = function () {
+            _this.newClient = {
+                code: _this.props.workmode == 2 ? _this.props.nextID : _this.state.editedClient.code,
+                name: _this.nameRef.current.value,
+                otch: _this.otchRef.current.value,
+                fam: _this.famRef.current.value,
+                balance: +_this.balanceRef.current.value
+                /* console.log(this.props.nextID) */
+            };_this.props.events.emit("E_SaveClient", _extends({}, _this.newClient));
+        };
+
+        _this.famRef = _react2.default.createRef();
+        _this.nameRef = _react2.default.createRef();
+        _this.otchRef = _react2.default.createRef();
+        _this.balanceRef = _react2.default.createRef();
+        _this.input = _react2.default.createRef();
+        _this.newClient = null;
+        return _this;
+    }
+
+    _createClass(EditProduct, [{
+        key: 'render',
+        value: function render() {
+
+            console.log("EditClient render");
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'span',
+                    { className: 'title' },
+                    this.props.workmode === 1 ? "Редактируем клиента" : "Добавляем нового клиента"
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'label' },
+                    '\u041D\u043E\u0432\u0430\u044F \u0444\u0430\u043C\u0438\u043B\u0438\u044F:'
+                ),
+                _react2.default.createElement('input', { type: 'text',
+                    defaultValue: this.props.workmode == 1 ? this.state.editedClient.fam : null,
+                    ref: this.famRef
+                }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'label' },
+                    '\u041D\u043E\u0432\u043E\u0435 \u0438\u043C\u044F:'
+                ),
+                _react2.default.createElement('input', { type: 'text',
+                    defaultValue: this.props.workmode == 1 ? this.state.editedClient.name : null,
+                    ref: this.nameRef
+                }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'label' },
+                    '\u041D\u043E\u0432\u043E\u0435 \u043E\u0442\u0447\u0435\u0441\u0442\u0432\u043E:'
+                ),
+                _react2.default.createElement('input', { type: 'text',
+                    defaultValue: this.props.workmode == 1 ? this.state.editedClient.otch : null,
+                    ref: this.otchRef
+                }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'label' },
+                    '\u041D\u043E\u0432\u044B\u0439 \u0431\u0430\u043B\u0430\u043D\u0441:'
+                ),
+                _react2.default.createElement('input', { type: 'text',
+                    defaultValue: this.props.workmode == 1 ? this.state.editedClient.balance : null,
+                    ref: this.balanceRef
+                }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'button', value: 'save', onClick: this.save })
+            );
+        }
+    }]);
+
+    return EditProduct;
+}(_react2.default.PureComponent);
+
+EditProduct.propTypes = {
+    info: _propTypes2.default.shape({
+        code: _propTypes2.default.number,
+        name: _propTypes2.default.string,
+        otch: _propTypes2.default.string,
+        fam: _propTypes2.default.string,
+        balance: _propTypes2.default.number
+    }),
+    events: _propTypes2.default.object.isRequired,
+    nextID: _propTypes2.default.number,
+    workmode: _propTypes2.default.number.isRequired
+};
+exports.default = EditProduct;
 
 /***/ }),
 /* 27 */

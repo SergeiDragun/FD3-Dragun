@@ -1,9 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {myEvents} from './events'
+
 import './style.css'
+
 class MobileClients extends React.PureComponent {
-   
+    
+    constructor(props) {
+        super(props)
+    }
+
     static propTypes = {
         info: PropTypes.shape({
             code: PropTypes.number.isRequired,
@@ -12,18 +17,26 @@ class MobileClients extends React.PureComponent {
             fam: PropTypes.string.isRequired,
             balance: PropTypes.number.isRequired
         }),
+        events: PropTypes.object.isRequired
     }
 
     state = {
         info: this.props.info
     }
-
+    
     delClient = () => {
-        myEvents.emit("E_DelClient", this.state.info)
+        this.props.events.emit("E_DelClient", this.state.info)
     }
 
     editClient = () => {
-        myEvents.emit("E_EditClient", this.state.info)
+        let nc = {
+            fam: this.state.info.fam,
+            name: this.state.info.name,
+            otch: this.state.info.otch,
+            balance: this.state.info.balance,
+            code: this.state.info.code,
+        }
+        this.props.events.emit("E_EditClient", nc)
     }
 
     render() {
@@ -33,12 +46,12 @@ class MobileClients extends React.PureComponent {
         return (
             
             <tr>
-                <td>{this.state.info.fam}</td>
-                <td>{this.state.info.name}</td>
-                <td>{this.state.info.otch}</td>
-                <td>{this.state.info.balance}</td>
-                <td className={ (this.state.info.balance<=0) ? 'blocked' : 'active' }>
-                    { (this.state.info.balance <=0) ? 'blocked' : 'active' }
+                <td>{this.props.info.fam}</td>
+                <td>{this.props.info.name}</td>
+                <td>{this.props.info.otch}</td>
+                <td>{this.props.info.balance}</td>
+                <td className={ (this.props.info.balance<=0) ? 'blocked' : 'active' }>
+                    { (this.props.info.balance <=0) ? 'blocked' : 'active' }
                 </td>
                 <td><input type='button' value='Редактировать' onClick={this.editClient}/></td>
                 <td><input type='button' value='Удалить' onClick={this.delClient}/></td>

@@ -5,4 +5,17 @@
 .blocked {
     background-color: red;
 }
+
+.label {
+    display: inline-block;
+    width: 120px;
+    white-space: nowrap;
+}
+
+.title {
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+}
+
 /*# sourceMappingURL=bundle.css.map*/
